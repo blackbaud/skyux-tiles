@@ -4,13 +4,13 @@ import {
 import {
   CommonModule
 } from '@angular/common';
-
-import {
-  SkyChevronModule
-} from '@skyux/indicators';
 import {
   SkyI18nModule
 } from '@skyux/i18n';
+import {
+  SkyChevronModule,
+  SkyIconModule
+} from '@skyux/indicators';
 import {
   SkyTileComponent
 } from './tile.component';
@@ -20,9 +20,6 @@ import {
 import {
   SkyTileTitleComponent
 } from './tile-title.component';
-import {
-  SkyIconModule
-} from '@skyux/indicators';
 
 @NgModule({
   declarations: [
