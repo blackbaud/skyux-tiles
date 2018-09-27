@@ -9,14 +9,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {
-  Observable
-} from 'rxjs/Observable';
-import 'rxjs/add/operator/take';
 
-import {
-  SkyAppResourcesService
-} from '@skyux/i18n';
 import {
   SkyMediaQueryService,
   SkyMediaBreakpoints
@@ -31,6 +24,7 @@ import {
 import {
   SkyTileDashboardService
 } from './tile-dashboard.service';
+import { SkyAppResourcesService } from '@skyux/i18n';
 
 @Component({
   selector: 'sky-tile-dashboard',
@@ -74,35 +68,31 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
     // in RC5. https://github.com/angular/angular/issues/10854
     public dashboardService: SkyTileDashboardService,
     private mediaQuery: SkyMediaQueryService,
-    private resources: SkyAppResourcesService
+    private resourcesService: SkyAppResourcesService
   ) {
     dashboardService.configChange.subscribe((config: SkyTileDashboardConfig) => {
       this.configChange.emit(config);
 
       // Update aria live region with tile drag info
       if (config.movedTile) {
-        let messageObservable: Observable<string>;
-        if (
-          this.mediaQuery.current === SkyMediaBreakpoints.xs ||
-          this.mediaQuery.current === SkyMediaBreakpoints.sm
-        ) {
-          messageObservable = this.resources.getString('tile_moved_assistive_text',
-            config.movedTile.tileDescription,
-            '1',
-            '1',
-            config.movedTile.position.toString(),
-            config.layout.singleColumn.tiles.length.toString());
-        } else {
-          messageObservable = this.resources.getString('tile_moved_assistive_text',
-            config.movedTile.tileDescription,
-            config.movedTile.column.toString(),
-            config.layout.multiColumn.length.toString(),
-            config.movedTile.position.toString(),
-            config.layout.multiColumn[config.movedTile.column - 1].tiles.length.toString());
-        }
-        messageObservable.take(1).subscribe(message => {
-          this.tileMovedReport = message;
-        });
+        this.resourcesService.getString('tile_moved_assistive_text')
+          .subscribe((message: string) => {
+            message = message.replace('{0}', config.movedTile.tileDescription);
+            message = message.replace('{3}', config.movedTile.position.toString());
+            if (
+              this.mediaQuery.current === SkyMediaBreakpoints.xs ||
+              this.mediaQuery.current === SkyMediaBreakpoints.sm
+            ) {
+              message = message.replace('{1}', '1');
+              message = message.replace('{2}', '1');
+              message = message.replace('{4}', config.layout.singleColumn.tiles.length.toString());
+            } else {
+              message = message.replace('{1}', config.movedTile.column.toString());
+              message = message.replace('{2}', config.layout.multiColumn.length.toString());
+              message = message.replace('{4}', config.layout.multiColumn[config.movedTile.column - 1].tiles.length.toString());
+            }
+            this.tileMovedReport = message;
+          });
       }
     });
   }

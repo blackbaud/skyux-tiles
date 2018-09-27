@@ -7,9 +7,9 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-// import {
-//   skyAnimationSlide
-// } from '@skyux/animations';
+import {
+  skyAnimationSlide
+} from '@skyux/animations';
 
 import {
   SkyTileDashboardService
@@ -18,8 +18,8 @@ import {
 @Component({
   selector: 'sky-tile',
   styleUrls: ['./tile.component.scss'],
-  templateUrl: './tile.component.html'
-  // animations: [skyAnimationSlide]
+  templateUrl: './tile.component.html',
+  animations: [skyAnimationSlide]
 })
 export class SkyTileComponent {
   public isInDashboardColumn = false;
