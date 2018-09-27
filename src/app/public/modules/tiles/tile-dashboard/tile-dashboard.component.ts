@@ -7,13 +7,18 @@ import {
   Output,
   QueryList,
   ViewChild,
-  ViewChildren
+  ViewChildren,
+  Optional
 } from '@angular/core';
 
 import {
   SkyMediaQueryService,
   SkyMediaBreakpoints
 } from '@skyux/core';
+
+import {
+  SkyAppResourcesService
+} from '@skyux/i18n';
 
 import {
   SkyTileDashboardColumnComponent
@@ -24,7 +29,6 @@ import {
 import {
   SkyTileDashboardService
 } from './tile-dashboard.service';
-import { SkyAppResourcesService } from '@skyux/i18n';
 
 @Component({
   selector: 'sky-tile-dashboard',
@@ -68,13 +72,13 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
     // in RC5. https://github.com/angular/angular/issues/10854
     public dashboardService: SkyTileDashboardService,
     private mediaQuery: SkyMediaQueryService,
-    private resourcesService: SkyAppResourcesService
+    @Optional() private resourcesService?: SkyAppResourcesService
   ) {
     dashboardService.configChange.subscribe((config: SkyTileDashboardConfig) => {
       this.configChange.emit(config);
 
       // Update aria live region with tile drag info
-      if (config.movedTile) {
+      if (config.movedTile && this.resourcesService) {
         this.resourcesService.getString('tile_moved_assistive_text')
           .subscribe((message: string) => {
             message = message.replace('{0}', config.movedTile.tileDescription);
