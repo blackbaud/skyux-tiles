@@ -6,7 +6,7 @@ import { SkyTileDemoTile2Component } from './tile-demo-tile2.component';
 
 @Component({
   selector: 'sky-tile-demo',
-  template: '<sky-tile-dashboard [(config)]="dashboardConfig"></sky-tile-dashboard>'
+  templateUrl: 'tile-visual.component.html'
 })
 export class SkyTileDemoComponent {
   public dashboardConfig: SkyTileDashboardConfig;

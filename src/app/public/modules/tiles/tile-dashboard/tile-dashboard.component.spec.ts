@@ -2,7 +2,8 @@ import { QueryList } from '@angular/core';
 import {
   fakeAsync,
   TestBed,
-  tick
+  tick,
+  async
 } from '@angular/core/testing';
 
 import {
@@ -337,4 +338,14 @@ describe('Tile dashboard component', () => {
       expect(tileEl.querySelector('.sky-tile-title')).toHaveText('Tile 1');
     })
   );
+
+  it('should pass accessibility', async(() => {
+    let fixture = TestBed.createComponent(TileDashboardOnPushTestComponent);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      // For some reason we have to run change detection twice for the tile to actually render.
+      fixture.detectChanges();
+      expect(fixture.nativeElement).toBeAccessible();
+    });
+  }));
 });

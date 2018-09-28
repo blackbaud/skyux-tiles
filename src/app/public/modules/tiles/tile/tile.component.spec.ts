@@ -1,7 +1,8 @@
 import {
   fakeAsync,
   TestBed,
-  tick
+  tick,
+  async
 } from '@angular/core/testing';
 
 import {
@@ -275,4 +276,12 @@ describe('Tile component', () => {
       expect(contentAttrs['hidden']).toBe(undefined);
     });
   });
+
+  it('should pass accessibility', async(() => {
+    let fixture = TestBed.createComponent(TileTestComponent);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(fixture.nativeElement).toBeAccessible();
+    });
+  }));
 });
