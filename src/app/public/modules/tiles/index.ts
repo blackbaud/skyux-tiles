@@ -5,11 +5,14 @@ export {
 } from './tile-dashboard';
 export {
   SkyTileComponent,
+  SkyTileTitleComponent,
+  SkyTileSummaryComponent,
   SkyTileModule
 } from './tile';
 export {
   SkyTileContentModule,
-  SkyTileContentSectionComponent
+  SkyTileContentSectionComponent,
+  SkyTileContentComponent
 } from './tile-content';
 export {
   SkyTileDashboardColumnComponent,
@@ -20,6 +23,7 @@ export {
   SkyTileDashboardConfigLayout,
   SkyTileDashboardConfigLayoutColumn,
   SkyTileDashboardConfigLayoutTile,
-  SkyTileDashboardConfigTile
+  SkyTileDashboardConfigTile,
+  SkyTileDashboardConfigReorderData
 } from './tile-dashboard-config';
 export { SkyTilesModule } from './tiles.module';
