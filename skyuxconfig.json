@@ -1,7 +1,9 @@
 {
   "name": "skyux-tiles",
   "mode": "easy",
+  "auth": true,
   "compileMode": "aot",
+  "appSettings": {},
   "skyuxModules": [
     "SkyErrorModule"
   ],

@@ -3,6 +3,14 @@ import {
 } from '@angular/core';
 
 import {
+  SkyUIConfigService
+} from '@skyux/core';
+
+import {
+  UIConfigService
+} from '@blackbaud-internal/skyux-lib-ui-config-service';
+
+import {
   SkyTilesModule
 } from './public';
 
@@ -20,7 +28,12 @@ import {
   exports: [
     SkyTilesModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: SkyUIConfigService,
+      useClass: UIConfigService
+    }
+  ],
   entryComponents: [
     SkyTileDemoTile1Component,
     SkyTileDemoTile2Component

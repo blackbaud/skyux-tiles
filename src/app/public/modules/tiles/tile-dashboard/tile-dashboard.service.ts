@@ -17,7 +17,8 @@ import {
 
 import {
   SkyMediaBreakpoints,
-  SkyMediaQueryService
+  SkyMediaQueryService,
+  SkyUIConfigService
 } from '@skyux/core';
 
 import {
@@ -46,15 +47,22 @@ export class SkyTileDashboardService {
 
   private config: SkyTileDashboardConfig;
 
+  private defaultConfig: SkyTileDashboardConfig;
+
   private columns: QueryList<SkyTileDashboardColumnComponent>;
 
   private singleColumn: SkyTileDashboardColumnComponent;
 
   private mediaSubscription: Subscription;
 
+  private configSubscription: Subscription;
+
+  private settingsKey: string;
+
   constructor(
     private dragulaService: DragulaService,
-    private mediaQuery: SkyMediaQueryService
+    private mediaQuery: SkyMediaQueryService,
+    private uiConfigService: SkyUIConfigService
   ) {
     this.bagId = 'sky-tile-dashboard-bag-' + (++bagIdIndex);
 
@@ -65,13 +73,39 @@ export class SkyTileDashboardService {
   public init(
     config: SkyTileDashboardConfig,
     columns?: QueryList<SkyTileDashboardColumnComponent>,
-    singleColumn?: SkyTileDashboardColumnComponent
+    singleColumn?: SkyTileDashboardColumnComponent,
+    settingsKey?: string
   ) {
-    this.config = config;
-    this.columns = columns;
-    this.singleColumn = singleColumn;
+    if (settingsKey) {
+      // Clone this so changes to the config object outside of this class don't modify
+      // the config used inside and vice versa.
+      this.defaultConfig = this.config = JSON.parse(JSON.stringify(config));
+      this.settingsKey = settingsKey;
 
-    this.checkReadyAndLoadTiles();
+      this.configSubscription = this.uiConfigService.getConfig(settingsKey, config)
+        .subscribe((value: any)  => {
+          if (value.settings || value.layout) {
+            if (value.layout) {
+              // User has no settings, response is original config
+              this.initToDefaults(value, columns, singleColumn);
+            } else {
+              this.config.layout = value.settings.userSettings;
+              this.config.tiles = config.tiles;
+              this.checkForNewTiles(value.settings.defaultSettings);
+              this.configChange.emit(this.config);
+
+              this.columns = columns;
+              this.singleColumn = singleColumn;
+              this.checkReadyAndLoadTiles();
+            }
+          } else {
+            // Bad data, ignore
+            this.initToDefaults(config, columns, singleColumn);
+          }
+        });
+    } else {
+      this.initToDefaults(config, columns, singleColumn);
+    }
   }
 
   public addTileComponent(
@@ -100,6 +134,11 @@ export class SkyTileDashboardService {
 
     if (tileConfig) {
       tileConfig.isCollapsed = isCollapsed;
+
+      if (this.settingsKey) {
+        this.setUserConfig(this.config);
+      }
+
       this.configChange.emit(this.config);
     }
   }
@@ -142,6 +181,10 @@ export class SkyTileDashboardService {
     /*istanbul ignore else */
     if (this.mediaSubscription) {
       this.mediaSubscription.unsubscribe();
+    }
+
+    if (this.configSubscription) {
+      this.configSubscription.unsubscribe();
     }
   }
 
@@ -247,6 +290,21 @@ export class SkyTileDashboardService {
           return tile;
         }
       }
+
+      // If the layout tile was not found in the list of tiles, it was removed since last the user updated settings
+      /*istanbul ignore else */
+      if (this.config.layout.singleColumn) {
+        this.config.layout.singleColumn.tiles = this.config.layout.singleColumn.tiles.filter(
+          elem => elem.id !== layoutTile.id
+        );
+      }
+
+      /*istanbul ignore else */
+      if (this.config.layout.multiColumn) {
+        this.config.layout.multiColumn.forEach(elem => {
+          elem.tiles = elem.tiles.filter(res => res.id !== layoutTile.id);
+        });
+      }
     }
 
     /*istanbul ignore next */
@@ -288,21 +346,24 @@ export class SkyTileDashboardService {
   ) {
     let tile = this.getTile(layoutTile);
 
-    let componentType = tile.componentType;
-    let providers = tile.providers /* istanbul ignore next */ || [];
+    /*istanbul ignore else */
+    if (tile) {
+      let componentType = tile.componentType;
+      let providers = tile.providers /* istanbul ignore next */ || [];
 
-    let resolvedProviders = ReflectiveInjector.resolve(providers);
+      let resolvedProviders = ReflectiveInjector.resolve(providers);
 
-    let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, column.injector);
+      let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, column.injector);
 
-    let factory = column.resolver.resolveComponentFactory(componentType);
-    let componentRef = column.content.createComponent(factory, undefined, injector);
+      let factory = column.resolver.resolveComponentFactory(componentType);
+      let componentRef = column.content.createComponent(factory, undefined, injector);
 
-    this.addTileComponent(layoutTile, componentRef);
+      this.addTileComponent(layoutTile, componentRef);
 
-    // Make sure the component is marked for changes in case the parent component uses
-    // the OnPush change detection strategy.
-    componentRef.changeDetectorRef.markForCheck();
+      // Make sure the component is marked for changes in case the parent component uses
+      // the OnPush change detection strategy.
+      componentRef.changeDetectorRef.markForCheck();
+    }
   }
 
   private moveTilesToSingleColumn() {
@@ -425,6 +486,10 @@ export class SkyTileDashboardService {
 
       /*istanbul ignore else */
       if (config) {
+        if (this.settingsKey) {
+          this.setUserConfig(config);
+        }
+
         this.configChange.emit(config);
       }
     });
@@ -462,5 +527,69 @@ export class SkyTileDashboardService {
 
     /*istanbul ignore next */
     return undefined;
+  }
+
+  private initToDefaults(config: SkyTileDashboardConfig,
+    columns: QueryList<SkyTileDashboardColumnComponent>,
+    singleColumn: SkyTileDashboardColumnComponent
+  ) {
+      this.config = config;
+      this.columns = columns;
+      this.singleColumn = singleColumn;
+      this.checkReadyAndLoadTiles();
+  }
+
+  private setUserConfig(config: SkyTileDashboardConfig) {
+    this.uiConfigService.setConfig(this.settingsKey, {userSettings: this.config.layout,
+      defaultSettings: this.defaultConfig.tiles.map(elem => elem.id)});
+  }
+
+  private checkForNewTiles(oldUserTiles: string[]) {
+    // Get a list of tiles that are in the config's default list but not in the user's settings
+    let newTiles = this.config.tiles.filter(elem => {
+      return oldUserTiles.indexOf(elem.id) === -1;
+    });
+
+    // Append new tiles to the end of the layouts
+    /*istanbul ignore else */
+    if (newTiles.length > 0) {
+      /*istanbul ignore else */
+      if (this.config.layout.multiColumn) {
+        newTiles.forEach(elem => {
+          let locationToAdd = 0;
+          let smallest = this.config.layout.multiColumn[0].tiles.length;
+          this.config.layout.multiColumn.forEach((item, index) => {
+            if (item.tiles.length < smallest) {
+              locationToAdd = index;
+              smallest = item.tiles.length;
+            }
+          });
+          this.config.layout.multiColumn[locationToAdd].tiles.push({id: elem.id, isCollapsed: false});
+        });
+      }
+
+      /*istanbul ignore else */
+      if (this.config.layout.singleColumn) {
+        newTiles.forEach(elem => {
+          this.config.layout.singleColumn.tiles.push({id: elem.id, isCollapsed: false});
+        });
+      }
+    }
+
+    /*istanbul ignore else */
+    if (this.config.layout.singleColumn) {
+      for (let tile of this.config.layout.singleColumn.tiles) {
+        this.getTile(tile);
+      }
+    }
+
+    /*istanbul ignore else */
+    if (this.config.layout.multiColumn) {
+      for (let i = 0, n = this.config.layout.multiColumn.length; i < n; i++) {
+        for (let tile of this.config.layout.multiColumn[i].tiles) {
+          this.getTile(tile);
+        }
+      }
+    }
   }
 }
