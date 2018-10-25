@@ -264,7 +264,7 @@ describe('Tile dashboard service', () => {
           undefined,
           {
             matches: (cls: string) => {
-              return cls === '.sky-tile-grab-handle';
+              return cls === '.sky-tile-grab-handle, .sky-tile-grab-handle i';
             }
           }
         );
