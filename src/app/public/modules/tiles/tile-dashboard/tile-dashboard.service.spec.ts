@@ -261,8 +261,8 @@ describe('Tile dashboard service', () => {
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
-    let tile: HTMLElement = fixture.nativeElement.querySelector('div.sky-test-tile-1');
-    let handle: HTMLElement = tile.querySelector('.sky-tile-grab-handle i');
+    let tile: Element = fixture.nativeElement.querySelector('div.sky-test-tile-1');
+    let handle: Element = tile.querySelector('.sky-tile-grab-handle i');
     let setOptionsSpy = spyOn(mockDragulaService, 'setOptions').and.callFake(
       (bagId: any, options: any) => {
         let result = options.moves(
