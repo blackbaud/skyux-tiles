@@ -15,45 +15,9 @@ export class MockSkyUIConfigService extends SkyUIConfigService {
   public getConfig(key: string, defaultConfig?: any): any {
     switch (key) {
       case 'defaultSettings':
-      return Observable.of(defaultConfig);
+        return Observable.of(defaultConfig);
       case 'badData':
-      return Observable.of({invalidProperty: 'invalidData'});
-      case 'columnOrder':
-      return Observable.of({
-        settings: {
-          userSettings: {
-            gridColumnOrder: ['column2', 'composite', 'column3', 'column1'],
-            sortByColumn: {
-              fieldSelector: 'column3',
-              descending: false
-            }
-          }
-        }
-      });
-      case 'newColumnOrder':
-      return Observable.of({
-        settings: {
-          userSettings: {
-            gridColumnOrder: ['column2', 'composite', 'column1'],
-            sortByColumn: {
-              fieldSelector: 'column3',
-              descending: false
-            }
-          }
-        }
-      });
-      case 'oldColumnOrder':
-      return Observable.of({
-        settings: {
-          userSettings: {
-            gridColumnOrder: ['column2', 'column4', 'composite', 'column3', 'column1'],
-            sortByColumn: {
-              fieldSelector: 'column3',
-              descending: false
-            }
-          }
-        }
-      });
+        return Observable.of({invalidProperty: 'invalidData'});
       default: {
         return Observable.of({
           settings: {
