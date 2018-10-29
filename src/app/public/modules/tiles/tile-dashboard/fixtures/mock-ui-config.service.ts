@@ -52,6 +52,7 @@ export class MockSkyUIConfigService extends SkyUIConfigService {
               }
             ]
           },
+          persisted: true,
           tileIds: [
             'tile-1',
             'tile-2'

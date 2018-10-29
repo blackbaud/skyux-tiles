@@ -85,7 +85,7 @@ export class SkyTileDashboardService {
 
       this.configSubscription = this.uiConfigService.getConfig(settingsKey, config)
         .subscribe((value: any)  => {
-          if (value.layout && value.tileIds) {
+          if (value.persisted) {
             this.config.layout = value.layout;
             this.checkForNewTiles(value.tileIds);
             this.configChange.emit(this.config);
@@ -94,7 +94,7 @@ export class SkyTileDashboardService {
             this.singleColumn = singleColumn;
             this.checkReadyAndLoadTiles();
           } else {
-            // Bad data, ignore
+            // Bad data, or config is the default config.
             this.initToDefaults(config, columns, singleColumn);
           }
         });
@@ -542,6 +542,7 @@ export class SkyTileDashboardService {
       this.settingsKey,
       {
         layout: this.config.layout,
+        persisted: true,
         tileIds: this.defaultConfig.tiles.map(elem => elem.id)
       }
     ).subscribe(
