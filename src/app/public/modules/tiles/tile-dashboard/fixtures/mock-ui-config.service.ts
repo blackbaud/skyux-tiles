@@ -63,6 +63,12 @@ export class MockSkyUIConfigService extends SkyUIConfigService {
     }
   }
 
-  public setConfig(key: string, value: any) {
+  public setConfig(key: string, value: any): Observable<any> {
+    switch (key) {
+      case 'badData':
+        return Observable.throw({message: 'Test error'});
+      default:
+        return Observable.of({});
+    }
   }
 }

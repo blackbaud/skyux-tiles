@@ -923,4 +923,38 @@ describe('Tile dashboard service', () => {
       dashboardService.init(newTileConfig, undefined, undefined, 'mySettingsKey');
     })
   );
+
+  it(
+    'should handle errors when setting config',
+    inject([SkyTileDashboardService], (dashboardService: SkyTileDashboardService) => {
+      const warnSpy = spyOn(console, 'warn');
+
+      dashboardService.init(dashboardConfig, undefined, undefined, 'badData');
+
+      let fixture = TestBed.createComponent(Tile1TestComponent);
+
+      let cmp: Tile1TestComponent = fixture.componentInstance;
+
+      fixture.detectChanges();
+
+      dashboardService.addTileComponent(
+        {
+          id: 'tile-1',
+          isCollapsed: false
+        },
+        fixture.componentRef
+      );
+
+      dashboardService.setTileCollapsed(
+        cmp.tile,
+        true
+      );
+
+      expect(warnSpy).toHaveBeenCalledWith('Could not save tile dashboard settings.');
+      expect(warnSpy).toHaveBeenCalledWith({
+        message: 'Test error'
+      });
+    })
+  );
+
 });
