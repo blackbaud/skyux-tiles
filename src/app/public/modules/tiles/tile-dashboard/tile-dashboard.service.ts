@@ -79,25 +79,20 @@ export class SkyTileDashboardService {
     if (settingsKey) {
       // Clone this so changes to the config object outside of this class don't modify
       // the config used inside and vice versa.
-      this.defaultConfig = this.config = JSON.parse(JSON.stringify(config));
+      this.defaultConfig = this.config = Object.assign({}, config);
+
       this.settingsKey = settingsKey;
 
       this.configSubscription = this.uiConfigService.getConfig(settingsKey, config)
         .subscribe((value: any)  => {
-          if (value.settings || value.layout) {
-            if (value.layout) {
-              // User has no settings, response is original config
-              this.initToDefaults(value, columns, singleColumn);
-            } else {
-              this.config.layout = value.settings.userSettings;
-              this.config.tiles = config.tiles;
-              this.checkForNewTiles(value.settings.defaultSettings);
-              this.configChange.emit(this.config);
+          if (value.layout && value.tileIds) {
+            this.config.layout = value.layout;
+            this.checkForNewTiles(value.tileIds);
+            this.configChange.emit(this.config);
 
-              this.columns = columns;
-              this.singleColumn = singleColumn;
-              this.checkReadyAndLoadTiles();
-            }
+            this.columns = columns;
+            this.singleColumn = singleColumn;
+            this.checkReadyAndLoadTiles();
           } else {
             // Bad data, ignore
             this.initToDefaults(config, columns, singleColumn);
@@ -546,8 +541,8 @@ export class SkyTileDashboardService {
     this.uiConfigService.setConfig(
       this.settingsKey,
       {
-        userSettings: this.config.layout,
-        defaultSettings: this.defaultConfig.tiles.map(elem => elem.id)
+        layout: this.config.layout,
+        tileIds: this.defaultConfig.tiles.map(elem => elem.id)
       }
     ).subscribe(
       () => { },
@@ -564,43 +559,45 @@ export class SkyTileDashboardService {
       return oldUserTiles.indexOf(elem.id) === -1;
     });
 
+    const { multiColumn, singleColumn } = this.config.layout;
+
     // Append new tiles to the end of the layouts
     /*istanbul ignore else */
     if (newTiles.length > 0) {
       /*istanbul ignore else */
-      if (this.config.layout.multiColumn) {
+      if (multiColumn) {
         newTiles.forEach(elem => {
           let locationToAdd = 0;
-          let smallest = this.config.layout.multiColumn[0].tiles.length;
-          this.config.layout.multiColumn.forEach((item, index) => {
+          let smallest = multiColumn[0].tiles.length;
+          multiColumn.forEach((item, index) => {
             if (item.tiles.length < smallest) {
               locationToAdd = index;
               smallest = item.tiles.length;
             }
           });
-          this.config.layout.multiColumn[locationToAdd].tiles.push({id: elem.id, isCollapsed: false});
+          multiColumn[locationToAdd].tiles.push({id: elem.id, isCollapsed: false});
         });
       }
 
       /*istanbul ignore else */
-      if (this.config.layout.singleColumn) {
+      if (singleColumn) {
         newTiles.forEach(elem => {
-          this.config.layout.singleColumn.tiles.push({id: elem.id, isCollapsed: false});
+          singleColumn.tiles.push({id: elem.id, isCollapsed: false});
         });
       }
     }
 
     /*istanbul ignore else */
-    if (this.config.layout.singleColumn) {
-      for (let tile of this.config.layout.singleColumn.tiles) {
+    if (singleColumn) {
+      for (let tile of singleColumn.tiles) {
         this.getTileOrRemoveFromLayout(tile);
       }
     }
 
     /*istanbul ignore else */
-    if (this.config.layout.multiColumn) {
-      for (let i = 0, n = this.config.layout.multiColumn.length; i < n; i++) {
-        for (let tile of this.config.layout.multiColumn[i].tiles) {
+    if (multiColumn) {
+      for (let i = 0, n = multiColumn.length; i < n; i++) {
+        for (let tile of multiColumn[i].tiles) {
           this.getTileOrRemoveFromLayout(tile);
         }
       }

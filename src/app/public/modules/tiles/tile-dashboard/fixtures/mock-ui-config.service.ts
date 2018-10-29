@@ -20,44 +20,42 @@ export class MockSkyUIConfigService extends SkyUIConfigService {
         return Observable.of({invalidProperty: 'invalidData'});
       default: {
         return Observable.of({
-          settings: {
-            userSettings: {
-                singleColumn: {
-                  tiles: [
-                    {
-                      id: 'tile-1',
-                      isCollapsed: true
-                    },
-                    {
-                      id: 'tile-2',
-                      isCollapsed: true
-                    }
-                  ]
+          layout: {
+            singleColumn: {
+              tiles: [
+                {
+                  id: 'tile-1',
+                  isCollapsed: true
                 },
-                multiColumn: [
+                {
+                  id: 'tile-2',
+                  isCollapsed: true
+                }
+              ]
+            },
+            multiColumn: [
+              {
+                tiles: [
                   {
-                    tiles: [
-                      {
-                        id: 'tile-2',
-                        isCollapsed: true
-                      }
-                    ]
-                  },
-                  {
-                    tiles: [
-                      {
-                        id: 'tile-1',
-                        isCollapsed: true
-                      }
-                    ]
+                    id: 'tile-2',
+                    isCollapsed: true
                   }
                 ]
-            },
-            defaultSettings: [
-              'tile-1',
-              'tile-2'
+              },
+              {
+                tiles: [
+                  {
+                    id: 'tile-1',
+                    isCollapsed: true
+                  }
+                ]
+              }
             ]
-          }
+          },
+          tileIds: [
+            'tile-1',
+            'tile-2'
+          ]
         });
       }
     }
