@@ -282,7 +282,9 @@ export class SkyTileDashboardService {
     return undefined;
   }
 
-  private getTile(layoutTile: SkyTileDashboardConfigLayoutTile): SkyTileDashboardConfigTile {
+  private getTileOrRemoveFromLayout(
+    layoutTile: SkyTileDashboardConfigLayoutTile
+  ): SkyTileDashboardConfigTile {
     /*istanbul ignore else */
     if (layoutTile) {
       for (let tile of this.config.tiles) {
@@ -344,7 +346,7 @@ export class SkyTileDashboardService {
     column: SkyTileDashboardColumnComponent,
     layoutTile: SkyTileDashboardConfigLayoutTile
   ) {
-    let tile = this.getTile(layoutTile);
+    let tile = this.getTileOrRemoveFromLayout(layoutTile);
 
     /*istanbul ignore else */
     if (tile) {
@@ -591,7 +593,7 @@ export class SkyTileDashboardService {
     /*istanbul ignore else */
     if (this.config.layout.singleColumn) {
       for (let tile of this.config.layout.singleColumn.tiles) {
-        this.getTile(tile);
+        this.getTileOrRemoveFromLayout(tile);
       }
     }
 
@@ -599,7 +601,7 @@ export class SkyTileDashboardService {
     if (this.config.layout.multiColumn) {
       for (let i = 0, n = this.config.layout.multiColumn.length; i < n; i++) {
         for (let tile of this.config.layout.multiColumn[i].tiles) {
-          this.getTile(tile);
+          this.getTileOrRemoveFromLayout(tile);
         }
       }
     }
