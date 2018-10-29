@@ -540,8 +540,19 @@ export class SkyTileDashboardService {
   }
 
   private setUserConfig(config: SkyTileDashboardConfig) {
-    this.uiConfigService.setConfig(this.settingsKey, {userSettings: this.config.layout,
-      defaultSettings: this.defaultConfig.tiles.map(elem => elem.id)});
+    this.uiConfigService.setConfig(
+      this.settingsKey,
+      {
+        userSettings: this.config.layout,
+        defaultSettings: this.defaultConfig.tiles.map(elem => elem.id)
+      }
+    ).subscribe(
+      () => { },
+      (err) => {
+        console.warn('Could not save tile dashboard settings.');
+        console.warn(err);
+      }
+    );
   }
 
   private checkForNewTiles(oldUserTiles: string[]) {
