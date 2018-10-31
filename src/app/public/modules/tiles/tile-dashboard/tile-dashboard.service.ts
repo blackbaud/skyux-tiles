@@ -15,6 +15,8 @@ import {
   Subscription
 } from 'rxjs/Subscription';
 
+import 'rxjs/add/operator/take';
+
 import {
   SkyMediaBreakpoints,
   SkyMediaQueryService,
@@ -55,8 +57,6 @@ export class SkyTileDashboardService {
 
   private mediaSubscription: Subscription;
 
-  private configSubscription: Subscription;
-
   private settingsKey: string;
 
   constructor(
@@ -83,7 +83,8 @@ export class SkyTileDashboardService {
 
       this.settingsKey = settingsKey;
 
-      this.configSubscription = this.uiConfigService.getConfig(settingsKey, config)
+      this.uiConfigService.getConfig(settingsKey, config)
+        .take(1)
         .subscribe((value: any)  => {
           if (value.persisted) {
             this.config.layout = value.layout;
@@ -176,10 +177,6 @@ export class SkyTileDashboardService {
     /*istanbul ignore else */
     if (this.mediaSubscription) {
       this.mediaSubscription.unsubscribe();
-    }
-
-    if (this.configSubscription) {
-      this.configSubscription.unsubscribe();
     }
   }
 
