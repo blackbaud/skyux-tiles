@@ -277,14 +277,6 @@ describe('Tile component', () => {
     });
   });
 
-  it('should pass accessibility', async(() => {
-    let fixture = TestBed.createComponent(TileTestComponent);
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(fixture.nativeElement).toBeAccessible();
-    });
-  }));
-
   describe('help button', () => {
     it('should be absent if a callback is not provided', () => {
       let html = `
@@ -318,7 +310,10 @@ describe('Tile component', () => {
 
       fixture.detectChanges();
 
-      expect(el.querySelector('.sky-tile-help')).not.toBeNull();
+      const helpEl = el.querySelector('.sky-tile-help');
+
+      expect(helpEl).not.toBeNull();
+      expect(helpEl.nativeElement.getAttribute('aria-label')).toBe('Help');
     });
 
     it('should not be present if a callback is provided, but the showHelp flag is false', () => {
