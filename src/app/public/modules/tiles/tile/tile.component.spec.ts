@@ -313,7 +313,7 @@ describe('Tile component', () => {
       const helpEl = el.querySelector('.sky-tile-help');
 
       expect(helpEl).not.toBeNull();
-      expect(helpEl.nativeElement.getAttribute('aria-label')).toBe('Help');
+      expect(helpEl.getAttribute('aria-label')).toBe('Help');
     });
 
     it('should not be present if a callback is provided, but the showHelp flag is false', () => {
