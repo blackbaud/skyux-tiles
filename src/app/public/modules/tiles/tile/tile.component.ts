@@ -28,7 +28,7 @@ export class SkyTileComponent {
   public showSettings = true;
 
   @Input()
-  public showHelp = true;
+  public showHelp = false;
 
   @Output()
   public settingsClick = new EventEmitter();
