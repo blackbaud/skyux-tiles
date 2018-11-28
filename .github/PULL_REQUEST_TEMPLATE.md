@@ -8,7 +8,7 @@
 - [ ] Visual tests written (if needed)
 - [ ] A11y checked
 - [ ] Documentation guidance provided (if enhancement or new component)
-- [ ] UX Sign-off recieved (if enhancement or new component)
+- [ ] UX Sign-off received (if enhancement or new component)
 <!--Be sure to notify docs if documentation changes are needed-->
 <!--Be sure to assign/request review from design if UX sign-off is needed-->
 
