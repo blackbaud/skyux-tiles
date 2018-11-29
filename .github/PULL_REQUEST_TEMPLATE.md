@@ -1,21 +1,21 @@
 ### Description
 
-### Related Issue <!--Tag issue number here without using the "Resolves" or "Fixes" keywords-->
+### Related Issues <!--Tag issue number here without using the "Resolves" or "Fixes" keywords-->
 
-### Checks
+### Checklist
+For more information, see the (SKY UX contribution guidelines)[https://github.com/blackbaud/skyux2/blob/master/CONTRIBUTING.md].
 
-- [ ] Unit tests written
-- [ ] Visual tests written (if needed)
-- [ ] A11y checked
-- [ ] Documentation guidance provided (if enhancement or new component)
-- [ ] UX Sign-off received (if enhancement or new component)
-<!--Be sure to notify docs if documentation changes are needed-->
-<!--Be sure to assign/request review from design if UX sign-off is needed-->
+- [ ] UX signoff for new components and enhancements (both design and implementation)
+- [ ] Unit tests for all new code
+- [ ] Visual tests for new components and for visual changes to existing components
+- [ ] Accessibility tests for new components and for changes to existing components
+<!--Be sure to assign/request review from design if UX signoff is needed-->
 
 <!--These sections can be removed for changes that do not require any documentation changes-->
-### Docs Guidance
-#### New/Changed Inputs
+### Documentation Guidance
+<!--Be sure to notify docs if documentation changes are needed-->
+#### Descriptions of New Inputs/Outputs and of Changes to Existing Inputs/Outputs
 
-#### Other documentation significant changes
+#### Descriptions of Other Significant Changes to Document
 
-#### Related Docs Issue
+#### Related Documentation Issue
