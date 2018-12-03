@@ -1,4 +1,4 @@
-# 3.0.0-rc.4 (2018-11-30)
+# 3.0.0-rc.4 (2018-12-03)
 
 - Added an optional help button to the tile component's header. [#14](https://github.com/blackbaud/skyux-tiles/pull/14)
 
