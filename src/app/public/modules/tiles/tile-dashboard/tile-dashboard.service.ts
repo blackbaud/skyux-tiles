@@ -524,7 +524,8 @@ export class SkyTileDashboardService {
     return undefined;
   }
 
-  private initToDefaults(config: SkyTileDashboardConfig,
+  private initToDefaults(
+    config: SkyTileDashboardConfig,
     columns: QueryList<SkyTileDashboardColumnComponent>,
     singleColumn: SkyTileDashboardColumnComponent
   ) {
