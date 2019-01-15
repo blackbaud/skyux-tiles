@@ -43,7 +43,7 @@
 
 .sky-tile-tools {
   display: flex;
-  padding-right: $sky-padding;
+  padding-right: $sky-space-lg;
 }
 
 .sky-tile-tools-control {
@@ -53,7 +53,8 @@
   height: 24px;
   padding: 0;
   display: block;
-  margin: 0 2px;
+  margin: 0;
+  margin-left: 5px;
 }
 
 .sky-tile-grab-handle {
