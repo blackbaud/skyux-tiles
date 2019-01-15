@@ -16,7 +16,7 @@
     <div class="sky-tile-header-column-tools">
       <div class="sky-tile-tools">
         <button *ngIf="hasHelp"
-          class="sky-btn sky-tile-tools-control"
+          class="sky-btn sky-tile-tools-control sky-tile-help"
           type="button"
           [attr.aria-label]="'skyux_tile_help' | skyLibResources"
           (click)="helpButtonClicked();"
@@ -30,7 +30,7 @@
         >
         </sky-chevron>
         <button *ngIf="hasSettings"
-          class="sky-btn sky-tile-tools-control"
+          class="sky-btn sky-tile-tools-control sky-tile-settings"
           type="button"
           [attr.aria-label]="'skyux_tile_settings' | skyLibResources"
           (click)="settingsButtonClicked();"
@@ -40,7 +40,8 @@
         <button *ngIf="isInDashboardColumn"
           class="sky-btn sky-tile-tools-control sky-tile-grab-handle"
           [attr.aria-label]="'skyux_tile_grab_handle' | skyLibResources"
-          (click)="moveTile($event)"
+          (click)="$event.stopPropagation()"
+          (keydown)="moveTile($event)"
           #grabHandle
         >
           <sky-icon icon="th"></sky-icon>
