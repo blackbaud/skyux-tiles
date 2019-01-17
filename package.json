@@ -28,7 +28,7 @@
     "@skyux/animations": "^3.0.0",
     "@skyux/core": "^3.5.1",
     "@skyux/i18n": "^3.5.0",
-    "@skyux/indicators": "^3.0.2"
+    "@skyux/indicators": "^3.0.3"
   },
   "dependencies": {
     "dragula": "3.7.2",
@@ -38,6 +38,6 @@
     "@blackbaud/skyux": "2.38.0",
     "@blackbaud/skyux-builder": "1.30.0",
     "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.5",
-    "@skyux/indicators": "3.0.2"
+    "@skyux/indicators": "3.0.3"
   }
 }
