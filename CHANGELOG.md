@@ -1,6 +1,6 @@
 # 3.0.1 (2019-01-18)
 
-- Fixed tile header component to align title on baseline in Microsoft Edge. [#25](https://github.com/blackbaud/skyux-tiles/pull/25)
+- Fixed tile header component to align title on baseline in Microsoft Edge and IE 11. [#25](https://github.com/blackbaud/skyux-tiles/pull/25)
 
 # 3.0.0 (2019-01-14)
 
