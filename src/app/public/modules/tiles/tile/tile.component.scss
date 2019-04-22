@@ -6,6 +6,18 @@
   margin-bottom: $sky-margin-double;
 }
 
+@include sky-media-container-xs() {
+  .sky-tile {
+    margin-bottom: 0;
+  }
+}
+
+@include sky-media-container-sm() {
+  .sky-tile {
+    margin-bottom: $sky-margin-double;
+  }
+}
+
 .sky-tile-header {
   border-color: $sky-border-color-neutral-medium;
   border-style: solid solid none;
