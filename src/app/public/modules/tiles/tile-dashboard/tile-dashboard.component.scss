@@ -12,6 +12,19 @@
   .sky-tile-dashboard-layout-single {
     display: block;
   }
+
+  /* NOTE: This style is here as we only want it when inside a tile dashboard */
+  .sky-tile-dashboard-layout-single ::ng-deep .sky-tile,
+  .sky-tile-dashboard-layout-multi ::ng-deep .sky-tile {
+    margin-bottom: 0;
+  }
+}
+
+@include sky-media-container-sm() {
+  .sky-tile-dashboard-layout-single ::ng-deep .sky-tile,
+  .sky-tile-dashboard-layout-multi ::ng-deep .sky-tile {
+    margin-bottom: $sky-margin-double;
+  }
 }
 
 @include sky-media-container-md() {
