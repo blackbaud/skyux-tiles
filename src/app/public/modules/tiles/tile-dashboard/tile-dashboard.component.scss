@@ -1,7 +1,7 @@
 @import "~@skyux/theme/scss/mixins";
 @import "~@skyux/theme/scss/_compat/mixins";
 
-@include sky-media-container-xs() {
+@include sky-host-responsive-container-xs-min() {
   display: block;
   padding: 0;
 
@@ -20,14 +20,14 @@
   }
 }
 
-@include sky-media-container-sm() {
+@include sky-host-responsive-container-sm-min() {
   .sky-tile-dashboard-layout-single ::ng-deep .sky-tile,
   .sky-tile-dashboard-layout-multi ::ng-deep .sky-tile {
     margin-bottom: $sky-margin-double;
   }
 }
 
-@include sky-media-container-md() {
+@include sky-host-responsive-container-md-min() {
   display: flex;
   padding: 0 $sky-padding;
 

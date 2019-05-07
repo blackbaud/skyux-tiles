@@ -10,11 +10,11 @@
   overflow: hidden;
 }
 
-@include sky-media-container-xs() {
+@include sky-host-responsive-container-xs-min() {
   padding: 0;
 }
 
-@include sky-media-container-sm() {
+@include sky-host-responsive-container-sm-min() {
   padding: 0 $sky-padding;
 }
 
