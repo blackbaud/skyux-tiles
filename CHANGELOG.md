@@ -1,3 +1,7 @@
+# 3.1.0 (2019-05-17)
+
+- Added ability to trigger responsive styles based on a parent component. [#29](https://github.com/blackbaud/skyux-tiles/pull/29)
+
 # 3.0.1 (2019-01-18)
 
 - Fixed tile header component to align title on baseline in Microsoft Edge and IE 11. [#25](https://github.com/blackbaud/skyux-tiles/pull/25)
