@@ -1,6 +1,6 @@
 # 3.1.1 (2019-07-15)
 
-- Fixed `SkyTileModule` to import missing `BrowserAnimationsModule`. [#32](https://github.com/blackbaud/skyux-tiles/pull/32)
+- Fixed `SkyTileModule` to import the missing `BrowserAnimationsModule`. [#32](https://github.com/blackbaud/skyux-tiles/pull/32)
 
 # 3.1.0 (2019-05-17)
 
