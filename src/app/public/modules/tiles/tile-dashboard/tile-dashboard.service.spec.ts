@@ -447,9 +447,9 @@ describe('Tile dashboard service', () => {
 
   it('should allow tiles to be moved within a column in single column mode', fakeAsync(() => {
     let fixture = createDashboardTestComponent();
+    mockMediaQueryService.fire(SkyMediaBreakpoints.sm);
     fixture.detectChanges();
     tick();
-    mockMediaQueryService.fire(SkyMediaBreakpoints.sm);
     fixture.detectChanges();
 
     testColumnNavigation(fixture, 'Down', 2, true);
@@ -559,9 +559,9 @@ describe('Tile dashboard service', () => {
       let fixture = createDashboardTestComponent();
       let el = fixture.nativeElement;
 
+      mockMediaQueryService.fire(SkyMediaBreakpoints.sm);
       fixture.detectChanges();
       tick();
-      mockMediaQueryService.fire(SkyMediaBreakpoints.sm);
       fixture.detectChanges();
 
       let multiColumnEls = el.querySelectorAll('.sky-tile-dashboard-layout-multi');
