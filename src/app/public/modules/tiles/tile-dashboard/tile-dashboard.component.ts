@@ -11,7 +11,7 @@ import {
   Optional
 } from '@angular/core';
 import {
-  Observable
+  Observable, Subject
 } from 'rxjs';
 import 'rxjs/operator/take';
 
@@ -33,6 +33,10 @@ import {
 import {
   SkyTileDashboardService
 } from './tile-dashboard.service';
+import {
+  SkyTileDashboardMessage,
+  SkyTileDashboardMessageType
+} from './types';
 
 @Component({
   selector: 'sky-tile-dashboard',
@@ -55,6 +59,9 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
   }
 
   @Input()
+  public messageStream = new Subject<SkyTileDashboardMessage>();
+
+  @Input()
   public settingsKey: string;
 
   @Output()
@@ -71,6 +78,8 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
   private _config: SkyTileDashboardConfig;
 
   private configSet = false;
+
+  private ngUnsubscribe = new Subject();
 
   private viewReady = false;
 
@@ -115,11 +124,19 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngAfterViewInit() {
+    this.messageStream
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((message: SkyTileDashboardMessage) => {
+        this.handleIncomingMessages(message);
+      });
+
     this.viewReady = true;
     this.checkReady();
   }
 
   public ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
     this.dashboardService.destroy();
   }
 
@@ -128,6 +145,19 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
       setTimeout(() => {
         this.dashboardService.init(this.config, this.columns, this.singleColumn, this.settingsKey);
       }, 0);
+    }
+  }
+
+  private handleIncomingMessages(message: SkyTileDashboardMessage): void {
+    /* tslint:disable-next-line:switch-default */
+    switch (message.type) {
+      case SkyTileDashboardMessageType.ExpandAll:
+        this.dashboardService.setAllTilesCollapsed(false);
+        break;
+
+      case SkyTileDashboardMessageType.CollapseAll:
+        this.dashboardService.setAllTilesCollapsed(true);
+        break;
     }
   }
 }
