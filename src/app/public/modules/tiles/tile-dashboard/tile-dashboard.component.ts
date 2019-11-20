@@ -16,6 +16,7 @@ import {
   Subject
 } from 'rxjs';
 import 'rxjs/operator/take';
+import 'rxjs/add/operator/takeUntil';
 
 import {
   SkyMediaQueryService,
