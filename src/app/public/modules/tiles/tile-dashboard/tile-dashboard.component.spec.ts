@@ -1,4 +1,6 @@
-import { QueryList } from '@angular/core';
+import {
+  QueryList
+} from '@angular/core';
 import {
   fakeAsync,
   TestBed,
@@ -7,17 +9,16 @@ import {
 } from '@angular/core/testing';
 
 import {
+  of
+} from 'rxjs';
+
+import {
   SkyUIConfigService
 } from '@skyux/core';
 
 import {
   expect
 } from '@skyux-sdk/testing';
-
-import { SkyTileDashboardColumnComponent } from '../tile-dashboard-column';
-import { SkyTileDashboardComponent } from './tile-dashboard.component';
-import { SkyTileDashboardConfig } from '../tile-dashboard-config';
-import { SkyTileDashboardService } from './tile-dashboard.service';
 
 import {
   MockTileDashboardService,
@@ -32,7 +33,19 @@ import {
 import {
   MockSkyUIConfigService
 } from './fixtures/mock-ui-config.service';
-import { of } from 'rxjs';
+
+import {
+  SkyTileDashboardColumnComponent
+} from '../tile-dashboard-column';
+import {
+  SkyTileDashboardComponent
+} from './tile-dashboard.component';
+import {
+  SkyTileDashboardConfig
+} from '../tile-dashboard-config';
+import {
+  SkyTileDashboardService
+} from './tile-dashboard.service';
 
 describe('Tile dashboard component', () => {
   let mockTileDashboardService: MockTileDashboardService;

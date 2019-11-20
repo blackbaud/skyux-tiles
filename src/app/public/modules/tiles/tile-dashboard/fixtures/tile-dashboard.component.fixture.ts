@@ -137,15 +137,15 @@ export class TileDashboardTestComponent {
     };
   }
 
-  public expandAll() {
+  public expandAll(): void {
     this.messageStream.next({ type: SkyTileDashboardMessageType.ExpandAll });
   }
 
-  public collapseAll() {
+  public collapseAll(): void {
     this.messageStream.next({ type: SkyTileDashboardMessageType.CollapseAll });
   }
 
-  public enableStickySettings() {
+  public enableStickySettings(): void {
     this.settingsKey = 'test';
     this.dashboardComponent.dashboardService.init(
       this.dashboardConfig,

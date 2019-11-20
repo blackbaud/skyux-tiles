@@ -10,8 +10,10 @@ import {
   ViewChildren,
   Optional
 } from '@angular/core';
+
 import {
-  Observable, Subject
+  Observable,
+  Subject
 } from 'rxjs';
 import 'rxjs/operator/take';
 
@@ -58,6 +60,10 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
     return this._config;
   }
 
+  /**
+   * Provides an observable to send commands to the tile dashboard. The commands should respect the
+   * `SkyTileDashboardMessage` type.
+   */
   @Input()
   public messageStream = new Subject<SkyTileDashboardMessage>();
 
@@ -123,7 +129,7 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  public ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     this.messageStream
       .takeUntil(this.ngUnsubscribe)
       .subscribe((message: SkyTileDashboardMessage) => {
@@ -134,13 +140,13 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
     this.checkReady();
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
     this.dashboardService.destroy();
   }
 
-  private checkReady() {
+  private checkReady(): void {
     if (this.viewReady && this.config) {
       setTimeout(() => {
         this.dashboardService.init(this.config, this.columns, this.singleColumn, this.settingsKey);

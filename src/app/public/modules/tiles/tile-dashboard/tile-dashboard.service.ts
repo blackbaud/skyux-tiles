@@ -127,7 +127,7 @@ export class SkyTileDashboardService {
     return undefined;
   }
 
-  public setAllTilesCollapsed(isCollapsed: boolean) {
+  public setAllTilesCollapsed(isCollapsed: boolean): void {
     /*istanbul ignore else */
     if (this.config && this.config.layout.multiColumn) {
       for (let column of this.config.layout.multiColumn) {
