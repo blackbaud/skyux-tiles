@@ -21,28 +21,32 @@ import {
 } from '@skyux-sdk/testing';
 
 import {
-  MockTileDashboardService,
-  SkyTileDashboardFixturesModule,
-  Tile1TestComponent,
-  Tile2TestComponent,
-  TileDashboardTestComponent,
-  TileDashboardOnPushTestComponent,
-  TileTestContext
-} from './fixtures';
-
-import {
   MockSkyUIConfigService
 } from './fixtures/mock-ui-config.service';
 
+import { MockTileDashboardService } from './fixtures/mock-tile-dashboard.service';
+
+import { SkyTileDashboardFixturesModule } from './fixtures/tile-dashboard-fixtures.module';
+
+import { TileDashboardTestComponent } from './fixtures/tile-dashboard.component.fixture';
+
+import { Tile1TestComponent } from './fixtures/tile1.component.fixture';
+
+import { Tile2TestComponent } from './fixtures/tile2.component.fixture';
+
+import { TileDashboardOnPushTestComponent } from './fixtures/tile-dashboard-on-push.component.fixture';
+
+import { TileTestContext } from './fixtures/tile-context.fixture';
+
 import {
   SkyTileDashboardColumnComponent
-} from '../tile-dashboard-column';
+} from '../tile-dashboard-column/tile-dashboard-column.component';
 import {
   SkyTileDashboardComponent
 } from './tile-dashboard.component';
 import {
   SkyTileDashboardConfig
-} from '../tile-dashboard-config';
+} from '../tile-dashboard-config/tile-dashboard-config';
 import {
   SkyTileDashboardService
 } from './tile-dashboard.service';
@@ -70,15 +74,6 @@ describe('Tile dashboard component', () => {
         SkyTileDashboardFixturesModule
       ]
     });
-  });
-
-  xit('should put the tile in the expected column for each breakpoint', () => {
-  });
-
-  xit('should remove the media breakpoint listener when destroyed', () => {
-  });
-
-  xit('should update tile order when tile moves to another column', () => {
   });
 
   it('should update tile order when tile moves within a column', fakeAsync(() => {
@@ -231,48 +226,6 @@ describe('Tile dashboard component', () => {
 
     expect(initSpy).not.toHaveBeenCalled();
   }));
-
-  xit('should update the tile collapsed state when the tile is collapsed', () => {
-  });
-
-  xit(
-    'should update the tile collapsed small state when the tile is collapsed on a small screen',
-    () => {
-    }
-  );
-
-  xit(
-    'should update the all-collapsed state when a tile\'s collapsed state changes',
-    () => {
-    }
-  );
-
-  xit(
-    'should update the tile collapsed state when the tile all-collapsed attribute changes',
-    () => {
-    }
-  );
-
-  xit(
-    `should not update tile state when display mode changed but the tile collapse state is not
-      changed by tile dashboard`,
-    () => {
-    }
-  );
-
-  xit(
-    `should not update tile state when display mode changed but the tile collapse state is not
-      changed by tile dashboard and tile intialization occurs after dashboard initialization`,
-    () => {
-    }
-  );
-
-  xit(
-    `should update the tile collapsed small state when the tile all-collapsed attribute
-    changes`,
-    () => {
-    }
-  );
 
   it(
     `should release resources when the component is destroyed`,

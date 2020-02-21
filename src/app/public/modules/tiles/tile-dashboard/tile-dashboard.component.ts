@@ -29,17 +29,21 @@ import {
 
 import {
   SkyTileDashboardColumnComponent
-} from '../tile-dashboard-column';
+} from '../tile-dashboard-column/tile-dashboard-column.component';
 import {
   SkyTileDashboardConfig
-} from '../tile-dashboard-config';
+} from '../tile-dashboard-config/tile-dashboard-config';
 import {
   SkyTileDashboardService
 } from './tile-dashboard.service';
+
 import {
-  SkyTileDashboardMessage,
+  SkyTileDashboardMessage
+} from './tile-dashboard-message';
+
+import {
   SkyTileDashboardMessageType
-} from './types';
+} from './tile-dashboard-message-type';
 
 @Component({
   selector: 'sky-tile-dashboard',
@@ -77,7 +81,10 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
   @ViewChildren(SkyTileDashboardColumnComponent)
   public columns: QueryList<SkyTileDashboardColumnComponent>;
 
-  @ViewChild('singleColumn', { read: SkyTileDashboardColumnComponent })
+  @ViewChild('singleColumn', {
+    read: SkyTileDashboardColumnComponent,
+    static: false
+  })
   public singleColumn: SkyTileDashboardColumnComponent;
 
   public tileMovedReport: string;

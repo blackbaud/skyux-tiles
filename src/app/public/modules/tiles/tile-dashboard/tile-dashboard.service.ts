@@ -24,13 +24,28 @@ import {
 } from '@skyux/core';
 
 import {
-  SkyTileComponent,
-  SkyTileDashboardColumnComponent,
-  SkyTileDashboardConfig,
-  SkyTileDashboardConfigLayoutColumn,
-  SkyTileDashboardConfigLayoutTile,
+  SkyTileComponent
+} from '../tile/tile.component';
+
+import {
+  SkyTileDashboardColumnComponent
+} from '../tile-dashboard-column/tile-dashboard-column.component';
+
+import {
+  SkyTileDashboardConfig
+} from '../tile-dashboard-config/tile-dashboard-config';
+
+import {
+  SkyTileDashboardConfigLayoutColumn
+} from '../tile-dashboard-config/tile-dashboard-config-layout-column';
+
+import {
+  SkyTileDashboardConfigLayoutTile
+} from '../tile-dashboard-config/tile-dashboard-config-layout-tile';
+
+import {
   SkyTileDashboardConfigTile
-} from '..';
+} from '../tile-dashboard-config/tile-dashboard-config-tile';
 
 const ATTR_TILE_ID = '_sky-tile-dashboard-tile-id';
 
