@@ -8,7 +8,7 @@ import {
 
 import {
   DragulaService
-} from 'ng2-dragula/ng2-dragula';
+} from 'ng2-dragula';
 
 import {
   MockDragulaService
