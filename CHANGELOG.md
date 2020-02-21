@@ -1,3 +1,9 @@
+# 4.0.0-rc.1 (2020-02-21)
+
+### Bug fixes
+
+- Removed the deep imports to `ng2-dragula` to support Angular Ivy Compiler. [#50](https://github.com/blackbaud/skyux-tiles/pull/50)
+
 # 4.0.0-rc.0 (2020-02-21)
 
 ### New features
