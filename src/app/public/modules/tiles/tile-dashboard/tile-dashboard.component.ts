@@ -15,8 +15,11 @@ import {
   Observable,
   Subject
 } from 'rxjs';
-import 'rxjs/operator/take';
-import 'rxjs/add/operator/takeUntil';
+
+import {
+  take,
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   SkyMediaQueryService,
@@ -29,17 +32,21 @@ import {
 
 import {
   SkyTileDashboardColumnComponent
-} from '../tile-dashboard-column';
+} from '../tile-dashboard-column/tile-dashboard-column.component';
 import {
   SkyTileDashboardConfig
-} from '../tile-dashboard-config';
+} from '../tile-dashboard-config/tile-dashboard-config';
 import {
   SkyTileDashboardService
 } from './tile-dashboard.service';
+
 import {
-  SkyTileDashboardMessage,
+  SkyTileDashboardMessage
+} from './tile-dashboard-message';
+
+import {
   SkyTileDashboardMessageType
-} from './types';
+} from './tile-dashboard-message-type';
 
 @Component({
   selector: 'sky-tile-dashboard',
@@ -77,7 +84,10 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
   @ViewChildren(SkyTileDashboardColumnComponent)
   public columns: QueryList<SkyTileDashboardColumnComponent>;
 
-  @ViewChild('singleColumn', { read: SkyTileDashboardColumnComponent })
+  @ViewChild('singleColumn', {
+    read: SkyTileDashboardColumnComponent,
+    static: false
+  })
   public singleColumn: SkyTileDashboardColumnComponent;
 
   public tileMovedReport: string;
@@ -122,7 +132,7 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
             config.layout.multiColumn[config.movedTile.column - 1].tiles.length.toString());
         }
         messageObservable
-          .take(1)
+          .pipe(take(1))
           .subscribe((message: string) => {
             this.tileMovedReport = message;
           });
@@ -132,7 +142,7 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
 
   public ngAfterViewInit(): void {
     this.messageStream
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((message: SkyTileDashboardMessage) => {
         this.handleIncomingMessages(message);
       });
