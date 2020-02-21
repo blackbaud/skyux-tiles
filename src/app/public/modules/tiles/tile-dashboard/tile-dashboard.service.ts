@@ -3,8 +3,8 @@ import {
   EventEmitter,
   Injectable,
   QueryList,
-  ReflectiveInjector,
-  Output
+  Output,
+  Injector
 } from '@angular/core';
 
 import {
@@ -13,9 +13,11 @@ import {
 
 import {
   Subscription
-} from 'rxjs/Subscription';
+} from 'rxjs';
 
-import 'rxjs/add/operator/take';
+import {
+  take
+} from 'rxjs/operators';
 
 import {
   SkyMediaBreakpoints,
@@ -97,8 +99,8 @@ export class SkyTileDashboardService {
 
       this.settingsKey = settingsKey;
 
-      this.uiConfigService.getConfig(settingsKey, config)
-        .take(1)
+      this.uiConfigService.getConfig(settingsKey, config).pipe(
+        take(1))
         .subscribe((value: any)  => {
           if (value.persisted) {
             this.config.layout = value.layout;
@@ -383,12 +385,13 @@ export class SkyTileDashboardService {
       let componentType = tile.componentType;
       let providers = tile.providers /* istanbul ignore next */ || [];
 
-      let resolvedProviders = ReflectiveInjector.resolve(providers);
+      const injector = Injector.create({
+        providers,
+        parent: column.injector
+      });
 
-      let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, column.injector);
-
-      let factory = column.resolver.resolveComponentFactory(componentType);
-      let componentRef = column.content.createComponent(factory, undefined, injector);
+      const factory = column.resolver.resolveComponentFactory(componentType);
+      const componentRef = column.content.createComponent(factory, undefined, injector);
 
       this.addTileComponent(layoutTile, componentRef);
 

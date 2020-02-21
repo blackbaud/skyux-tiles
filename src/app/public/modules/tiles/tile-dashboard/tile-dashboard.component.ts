@@ -15,8 +15,11 @@ import {
   Observable,
   Subject
 } from 'rxjs';
-import 'rxjs/operator/take';
-import 'rxjs/add/operator/takeUntil';
+
+import {
+  take,
+  takeUntil
+} from 'rxjs/operators';
 
 import {
   SkyMediaQueryService,
@@ -129,7 +132,7 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
             config.layout.multiColumn[config.movedTile.column - 1].tiles.length.toString());
         }
         messageObservable
-          .take(1)
+          .pipe(take(1))
           .subscribe((message: string) => {
             this.tileMovedReport = message;
           });
@@ -139,7 +142,7 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
 
   public ngAfterViewInit(): void {
     this.messageStream
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((message: SkyTileDashboardMessage) => {
         this.handleIncomingMessages(message);
       });

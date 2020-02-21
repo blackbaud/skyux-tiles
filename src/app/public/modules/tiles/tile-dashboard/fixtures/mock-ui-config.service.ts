@@ -3,28 +3,27 @@ import {
 } from '@angular/core';
 
 import {
-  Observable
-} from 'rxjs/Observable';
-
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
-
-import {
   SkyUIConfigService
 } from '@skyux/core';
+
+import {
+  Observable,
+  of as observableOf,
+  throwError as observableThrowError
+} from 'rxjs';
 
 @Injectable()
 export class MockSkyUIConfigService extends SkyUIConfigService {
   public getConfig(key: string, defaultConfig?: any): any {
     switch (key) {
       case 'defaultSettings':
-        return Observable.of(defaultConfig);
+        return observableOf(defaultConfig);
       case 'badData':
-        return Observable.of({invalidProperty: 'invalidData'});
+        return observableOf({invalidProperty: 'invalidData'});
       case 'error':
-        return Observable.throw({message: 'Test error'});
+        return observableThrowError({message: 'Test error'});
       default: {
-        return Observable.of({
+        return observableOf({
           layout: {
             singleColumn: {
               tiles: [
@@ -70,9 +69,9 @@ export class MockSkyUIConfigService extends SkyUIConfigService {
   public setConfig(key: string, value: any): Observable<any> {
     switch (key) {
       case 'badData':
-        return Observable.throw({message: 'Test error'});
+        return observableThrowError({message: 'Test error'});
       default:
-        return Observable.of({});
+        return observableOf({});
     }
   }
 }
