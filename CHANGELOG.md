@@ -1,4 +1,10 @@
-# 4.0.0-rc.1 (2020-02-21)
+# 4.0.0-rc.2 (2020-02-22)
+
+### New features
+
+- Updated Angular and SKY UX package peer dependencies. [#51](https://github.com/blackbaud/skyux-tiles/pull/51)
+
+# 4.0.0-rc.1 (2020-02-22)
 
 ### Bug fixes
 
