@@ -106,6 +106,11 @@ export class SkyTileDashboardService {
     }
   }
 
+  /**
+   * Adds a new tile to the tile dashboard.
+   * @param tile The tile configuration.
+   * @param component The tile component.
+   */
   public addTileComponent(
     tile: SkyTileDashboardConfigLayoutTile,
     component: ComponentRef<any>
@@ -117,6 +122,11 @@ export class SkyTileDashboardService {
     component.location.nativeElement.setAttribute(ATTR_TILE_ID, tile.id);
   }
 
+  /**
+   * Checks whether a specified tile is collapsed. The <sky-code>tile</sky-code> parameter
+   * specifies the tile to check.
+   * @param tile The tile component.
+   */
   public tileIsCollapsed(tile: SkyTileComponent): boolean {
     let tileConfig = this.findTile(this.getTileId(tile));
 
@@ -127,6 +137,10 @@ export class SkyTileDashboardService {
     return undefined;
   }
 
+  /**
+   * Sets the collapsed state of all tiles.
+   * @param isCollapsed Indicates whether a tile is collapsed.
+   */
   public setAllTilesCollapsed(isCollapsed: boolean): void {
     /*istanbul ignore else */
     if (this.config && this.config.layout.multiColumn) {
@@ -147,6 +161,11 @@ export class SkyTileDashboardService {
     this.configChange.emit(this.config);
   }
 
+  /**
+   * Sets the collapsed state of a specified tile.
+   * @param tile The tile component.
+   * @param isCollapsed Indicates whether it is collapsed.
+   */
   public setTileCollapsed(tile: SkyTileComponent, isCollapsed: boolean) {
     let tileConfig = this.findTile(this.getTileId(tile));
 
