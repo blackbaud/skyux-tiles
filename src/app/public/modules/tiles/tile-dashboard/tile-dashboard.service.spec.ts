@@ -147,6 +147,7 @@ describe('Tile dashboard service', () => {
     fakeAsync(
       () => {
         let fixture = createDashboardTestComponent();
+        fixture.detectChanges();
         let dashboardService = fixture.componentInstance.dashboardComponent['dashboardService'];
         let configChanged = false;
 

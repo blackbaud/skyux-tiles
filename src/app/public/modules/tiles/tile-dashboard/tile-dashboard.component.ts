@@ -105,7 +105,7 @@ export class SkyTileDashboardComponent implements AfterViewInit, OnDestroy {
     private mediaQuery: SkyMediaQueryService,
     @Optional() private resourcesService?: SkyLibResourcesService
   ) {
-    dashboardService.configChange.subscribe((config: SkyTileDashboardConfig) => {
+    this.dashboardService.configChange.subscribe((config: SkyTileDashboardConfig) => {
       this.configChange.emit(config);
 
       // Update aria live region with tile drag info
