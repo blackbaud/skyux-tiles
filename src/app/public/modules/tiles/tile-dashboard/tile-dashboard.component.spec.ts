@@ -290,7 +290,7 @@ describe('Tile dashboard component', () => {
 
       let tileComponentRef = cmp
         .dashboardComponent
-        .dashboardService
+        ['dashboardService']
         .getTileComponent('sky-test-tile-2');
 
       expect(tileComponentRef.instance.context.id).toBe(3);
@@ -313,7 +313,7 @@ describe('Tile dashboard component', () => {
 
       let tileComponentRef = cmp
         .dashboardComponent
-        .dashboardService
+        ['dashboardService']
         .getTileComponent('sky-test-tile-1');
 
       let tileEl = tileComponentRef.location.nativeElement;
