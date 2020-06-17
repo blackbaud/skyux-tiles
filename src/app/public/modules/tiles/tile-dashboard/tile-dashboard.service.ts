@@ -45,7 +45,7 @@ export class SkyTileDashboardService {
   @Output()
   public dashboardInitialized = new EventEmitter<void>();
 
-  private tileComponents: ComponentRef<SkyTileComponent>[];
+  private tileComponents: ComponentRef<any>[];
 
   private config: SkyTileDashboardConfig;
 
