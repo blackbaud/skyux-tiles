@@ -15,8 +15,13 @@ import {
   SkyAppLinkModule
 } from '@skyux/router';
 
-import { TileDemoTile1Component } from './docs/tiles/tile-demo-tile1.component';
-import { TileDemoTile2Component } from './docs/tiles/tile-demo-tile2.component';
+import {
+  TileDemoTile1Component
+} from './docs/tiles/tile-demo-tile1.component';
+
+import {
+  TileDemoTile2Component
+} from './docs/tiles/tile-demo-tile2.component';
 
 import {
   SkyTilesModule
