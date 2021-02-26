@@ -1,4 +1,9 @@
 <h1
-  class="sky-tile-title sky-section-heading">
+  class="sky-tile-title"
+  [ngClass]="{
+    'sky-font-heading-4' : themeName === 'modern',
+    'sky-section-heading' : themeName == 'default'
+  }"
+>
   <ng-content></ng-content>
 </h1>

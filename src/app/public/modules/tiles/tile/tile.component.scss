@@ -74,3 +74,14 @@
   border-style: solid solid none;
   border-width: 1px 0;
 }
+
+@include sky-theme-modern {
+  .sky-tile-header,
+  .sky-tile-content {
+    border: none;
+  }
+
+  .sky-tile-header-column-tools {
+    align-items: flex-start;
+  }
+}

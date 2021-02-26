@@ -1,3 +1,8 @@
-<div class="sky-tile-content-section sky-padding-even-large">
+<div
+  class="sky-tile-content-section"
+  [ngClass]="{
+    'sky-padding-even-large' : themeName === 'default'
+  }"
+>
   <ng-content></ng-content>
 </div>
