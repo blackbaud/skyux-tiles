@@ -49,7 +49,7 @@ export class SkyTileContentSectionComponent implements OnDestroy, OnInit {
     }
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

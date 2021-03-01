@@ -158,16 +158,16 @@ export class SkyTileComponent implements OnDestroy, OnInit {
     }
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public settingsButtonClicked() {
+  public settingsButtonClicked(): void {
     this.settingsClick.emit(undefined);
   }
 
-  public helpButtonClicked() {
+  public helpButtonClicked(): void {
     this.helpClick.emit(undefined);
   }
 
@@ -179,15 +179,15 @@ export class SkyTileComponent implements OnDestroy, OnInit {
     return this.helpClick.observers.length > 0 && this.showHelp;
   }
 
-  public titleClick() {
+  public titleClick(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  public chevronDirectionChange(direction: string) {
+  public chevronDirectionChange(direction: string): void {
     this.isCollapsed = direction === 'down';
   }
 
-  public moveTile(event: KeyboardEvent) {
+  public moveTile(event: KeyboardEvent): void {
     if (this.isInDashboardColumn) {
       let direction = event.key.toLowerCase().replace('arrow', '');
       if (direction === 'up'
