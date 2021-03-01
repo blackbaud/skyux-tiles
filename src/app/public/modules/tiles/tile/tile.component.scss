@@ -85,7 +85,15 @@
     align-items: flex-start;
   }
 
-  // ::ng-deep .sky-tile-content-section:last-child {
-  //   padding: $sky-space-lg 0 0 0;
-  // }
+  .sky-tile-content ::ng-deep sky-tile-content-section:first-child {
+    .sky-tile-content-section {
+      margin-top: $sky-space-lg;
+    }
+  }
+
+  .sky-tile-content ::ng-deep sky-tile-content-section:last-child {
+    .sky-tile-content-section {
+      padding-bottom: 0;
+    }
+  }
 }
