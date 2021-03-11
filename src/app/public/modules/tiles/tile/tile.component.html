@@ -1,9 +1,11 @@
 <section
-    class="sky-tile"
-    [ngClass]="{
-      'sky-tile-collapsed': isCollapsed,
-      'sky-box sky-elevation-1-bordered sky-padding-even-xl' : themeName === 'modern'
-    }"
+  class="sky-tile"
+  [ngClass]="{
+    'sky-tile-collapsed': isCollapsed
+  }"
+  [skyThemeClass]="{
+    'sky-box sky-elevation-1-bordered sky-padding-even-xl' : 'modern'
+  }"
 >
   <header class="sky-tile-header">
     <div
@@ -18,9 +20,9 @@
       </div>
       <div
         class="sky-tile-summary"
-        [ngClass]="{
-          'sky-font-heading-4' : themeName === 'modern',
-          'sky-headline' : themeName == 'default'
+        [skyThemeClass]="{
+          'sky-font-heading-4' : 'modern',
+          'sky-headline' : 'default'
         }"
       >
         <ng-content select="sky-tile-summary"></ng-content>
@@ -34,10 +36,10 @@
           [attr.aria-label]="'skyux_tile_help' | skyLibResources"
           (click)="helpButtonClicked();"
         >
-          <sky-icon *ngIf="themeName === 'default'"
+          <sky-icon *skyThemeIf="'default'"
             icon="question-circle"
           ></sky-icon>
-          <sky-icon *ngIf="themeName === 'modern'"
+          <sky-icon *skyThemeIf="'modern'"
             icon="help-line"
             iconType="skyux"
           ></sky-icon>
@@ -54,10 +56,10 @@
           [attr.aria-label]="'skyux_tile_settings' | skyLibResources"
           (click)="settingsButtonClicked();"
         >
-          <sky-icon *ngIf="themeName === 'default'"
+          <sky-icon *skyThemeIf="'default'"
             icon="cog"
           ></sky-icon>
-          <sky-icon *ngIf="themeName === 'modern'"
+          <sky-icon *skyThemeIf="'modern'"
             icon="cog-line"
             iconType="skyux"
           ></sky-icon>
@@ -69,10 +71,10 @@
           (keydown)="moveTile($event)"
           #grabHandle
         >
-          <sky-icon *ngIf="themeName === 'default'"
+          <sky-icon *skyThemeIf="'default'"
             icon="th"
           ></sky-icon>
-          <sky-icon *ngIf="themeName === 'modern'"
+          <sky-icon *skyThemeIf="'modern'"
             icon="tile-drag"
             iconType="skyux"
           ></sky-icon>

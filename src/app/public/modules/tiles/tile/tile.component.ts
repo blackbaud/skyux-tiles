@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Optional,
   Output,
   ViewChild
@@ -14,10 +13,6 @@ import {
 import {
   skyAnimationSlide
 } from '@skyux/animations';
-
-import {
-  SkyThemeService
-} from '@skyux/theme';
 
 import {
   Subject
@@ -40,7 +35,7 @@ import {
   templateUrl: './tile.component.html',
   animations: [skyAnimationSlide]
 })
-export class SkyTileComponent implements OnDestroy, OnInit {
+export class SkyTileComponent implements OnDestroy {
 
   /**
    * Indicates whether to display a settings button in the tile header. To display the
@@ -88,8 +83,6 @@ export class SkyTileComponent implements OnDestroy, OnInit {
     return this._isCollapsed;
   }
 
-  public themeName: string;
-
   /**
    * Indicates whether the tile is in a collapsed state.
    * @default false
@@ -126,7 +119,6 @@ export class SkyTileComponent implements OnDestroy, OnInit {
   constructor(
     public elementRef: ElementRef,
     private changeDetector: ChangeDetectorRef,
-    private themeSvc: SkyThemeService,
     @Optional() private dashboardService: SkyTileDashboardService
   ) {
     this.isInDashboardColumn = !!dashboardService;
@@ -140,19 +132,6 @@ export class SkyTileComponent implements OnDestroy, OnInit {
       this.dashboardService.configChange
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
-          this.changeDetector.markForCheck();
-        });
-    }
-  }
-
-  public ngOnInit(): void {
-    if (this.themeSvc) {
-      this.themeSvc.settingsChange
-        .pipe(
-          takeUntil(this.ngUnsubscribe)
-        )
-        .subscribe((themeSettings) => {
-          this.themeName = themeSettings.currentSettings?.theme?.name;
           this.changeDetector.markForCheck();
         });
     }
