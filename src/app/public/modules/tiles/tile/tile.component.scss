@@ -97,7 +97,7 @@
 
   .sky-tile-content {
     ::ng-deep  .sky-tile-content-section {
-      border-bottom: 1px dotted #DDDDDD;
+      border-bottom: 1px dotted $sky-theme-modern-color-gray-30;
     }
 
     ::ng-deep sky-tile-content-section:first-child {
