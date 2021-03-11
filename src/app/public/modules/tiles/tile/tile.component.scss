@@ -1,4 +1,5 @@
 @import "~@skyux/theme/scss/mixins";
+@import "~@skyux/theme/scss/variables";
 @import "~@skyux/theme/scss/_compat/mixins";
 
 .sky-tile {
@@ -91,18 +92,25 @@
 
   .sky-tile-tools-control {
     font-size: 18px;
-    color: #777;
+    color: $sky-theme-modern-color-gray-70;
   }
 
-  .sky-tile-content ::ng-deep sky-tile-content-section:first-child {
-    .sky-tile-content-section {
-      margin-top: $sky-space-lg;
+  .sky-tile-content {
+    ::ng-deep  .sky-tile-content-section {
+      border-bottom: 1px dotted #DDDDDD;
     }
-  }
 
-  .sky-tile-content ::ng-deep sky-tile-content-section:last-child {
-    .sky-tile-content-section {
-      padding-bottom: 0;
+    ::ng-deep sky-tile-content-section:first-child {
+      .sky-tile-content-section {
+        margin-top: $sky-space-lg;
+      }
+    }
+
+    ::ng-deep sky-tile-content-section:last-child {
+      .sky-tile-content-section {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
     }
   }
 }
