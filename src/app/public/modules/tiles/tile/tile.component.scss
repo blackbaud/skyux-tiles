@@ -85,6 +85,15 @@
     align-items: flex-start;
   }
 
+  .sky-tile-tools {
+    padding: 0;
+  }
+
+  .sky-tile-tools-control {
+    font-size: 18px;
+    color: #777;
+  }
+
   .sky-tile-content ::ng-deep sky-tile-content-section:first-child {
     .sky-tile-content-section {
       margin-top: $sky-space-lg;

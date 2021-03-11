@@ -38,7 +38,7 @@
             icon="question-circle"
           ></sky-icon>
           <sky-icon *ngIf="themeName === 'modern'"
-            icon="question-circle"
+            icon="help-line"
             iconType="skyux"
           ></sky-icon>
         </button>
@@ -58,7 +58,7 @@
             icon="cog"
           ></sky-icon>
           <sky-icon *ngIf="themeName === 'modern'"
-            icon="gear"
+            icon="cog-line"
             iconType="skyux"
           ></sky-icon>
         </button>
@@ -69,13 +69,13 @@
           (keydown)="moveTile($event)"
           #grabHandle
         >
-        <sky-icon *ngIf="themeName === 'default'"
-          icon="th"
-        ></sky-icon>
-        <sky-icon *ngIf="themeName === 'modern'"
-          icon="th"
-          iconType="skyux"
-        ></sky-icon>
+          <sky-icon *ngIf="themeName === 'default'"
+            icon="th"
+          ></sky-icon>
+          <sky-icon *ngIf="themeName === 'modern'"
+            icon="tile-drag"
+            iconType="skyux"
+          ></sky-icon>
         </button>
       </div>
     </div>
