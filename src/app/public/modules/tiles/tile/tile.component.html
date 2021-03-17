@@ -34,6 +34,9 @@
           class="sky-btn sky-tile-tools-control sky-tile-help"
           type="button"
           [attr.aria-label]="'skyux_tile_help' | skyLibResources"
+          [skyThemeClass]="{
+            'sky-btn-icon-borderless' : 'modern'
+          }"
           (click)="helpButtonClicked();"
         >
           <sky-icon *skyThemeIf="'default'"
@@ -54,6 +57,9 @@
           class="sky-btn sky-tile-tools-control sky-tile-settings"
           type="button"
           [attr.aria-label]="'skyux_tile_settings' | skyLibResources"
+          [skyThemeClass]="{
+            'sky-btn-icon-borderless' : 'modern'
+          }"
           (click)="settingsButtonClicked();"
         >
           <sky-icon *skyThemeIf="'default'"
@@ -67,6 +73,9 @@
         <button *ngIf="isInDashboardColumn"
           class="sky-btn sky-tile-tools-control sky-tile-grab-handle"
           [attr.aria-label]="'skyux_tile_grab_handle' | skyLibResources"
+          [skyThemeClass]="{
+            'sky-btn-icon-borderless' : 'modern'
+          }"
           (click)="$event.stopPropagation()"
           (keydown)="moveTile($event)"
           #grabHandle
