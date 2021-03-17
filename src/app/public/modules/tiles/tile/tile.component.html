@@ -30,23 +30,21 @@
     </div>
     <div class="sky-tile-header-column-tools">
       <div class="sky-tile-tools">
-        <button *ngIf="hasHelp"
-          class="sky-btn sky-tile-tools-control sky-tile-help"
-          type="button"
-          [attr.aria-label]="'skyux_tile_help' | skyLibResources"
-          [skyThemeClass]="{
-            'sky-btn-icon-borderless' : 'modern'
-          }"
-          (click)="helpButtonClicked();"
-        >
-          <sky-icon *skyThemeIf="'default'"
-            icon="question-circle"
-          ></sky-icon>
-          <sky-icon *skyThemeIf="'modern'"
-            icon="help-line"
-            iconType="skyux"
-          ></sky-icon>
-        </button>
+        <ng-container *skyThemeIf="'default'">
+          <button *ngIf="hasHelp"
+            class="sky-btn sky-tile-tools-control sky-tile-help"
+            type="button"
+            [attr.aria-label]="'skyux_tile_help' | skyLibResources"
+            [skyThemeClass]="{
+              'sky-btn-icon-borderless' : 'modern'
+            }"
+            (click)="helpButtonClicked();"
+          >
+            <sky-icon
+              icon="question-circle"
+            ></sky-icon>
+          </button>
+        </ng-container>
         <sky-chevron
           class="sky-tile-tools-control"
           [direction]="isCollapsed ? 'down' : 'up'"
