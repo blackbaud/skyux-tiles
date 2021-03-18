@@ -95,6 +95,10 @@
     color: $sky-theme-modern-color-gray-70;
   }
 
+  .sky-tile-grab-handle {
+    font-size: 16px;
+  }
+
   .sky-tile-content {
     ::ng-deep  .sky-tile-content-section {
       border-bottom: 1px dotted $sky-theme-modern-color-gray-30;

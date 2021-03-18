@@ -46,16 +46,19 @@
           </button>
         </ng-container>
         <sky-chevron
-          class="sky-tile-tools-control"
           [direction]="isCollapsed ? 'down' : 'up'"
+          [skyThemeClass]="{
+            'sky-tile-tools-control' : 'default'
+          }"
           (directionChange)="chevronDirectionChange($event)"
         >
         </sky-chevron>
         <button *ngIf="hasSettings"
-          class="sky-btn sky-tile-tools-control sky-tile-settings"
+          class="sky-btn sky-tile-settings"
           type="button"
           [attr.aria-label]="'skyux_tile_settings' | skyLibResources"
           [skyThemeClass]="{
+            'sky-tile-tools-control' : 'default',
             'sky-btn-icon-borderless' : 'modern'
           }"
           (click)="settingsButtonClicked();"
@@ -69,9 +72,10 @@
           ></sky-icon>
         </button>
         <button *ngIf="isInDashboardColumn"
-          class="sky-btn sky-tile-tools-control sky-tile-grab-handle"
+          class="sky-btn sky-tile-grab-handle"
           [attr.aria-label]="'skyux_tile_grab_handle' | skyLibResources"
           [skyThemeClass]="{
+            'sky-tile-tools-control' : 'default',
             'sky-btn-icon-borderless' : 'modern'
           }"
           (click)="$event.stopPropagation()"
