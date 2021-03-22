@@ -48,7 +48,8 @@
         <sky-chevron
           [direction]="isCollapsed ? 'down' : 'up'"
           [skyThemeClass]="{
-            'sky-tile-tools-control' : 'default'
+            'sky-tile-tools-control' : 'default',
+            'sky-margin-inline-default' : 'modern'
           }"
           (directionChange)="chevronDirectionChange($event)"
         >
@@ -59,7 +60,7 @@
           [attr.aria-label]="'skyux_tile_settings' | skyLibResources"
           [skyThemeClass]="{
             'sky-tile-tools-control' : 'default',
-            'sky-btn-icon-borderless' : 'modern'
+            'sky-btn-icon-borderless sky-margin-inline-default' : 'modern'
           }"
           (click)="settingsButtonClicked();"
         >
