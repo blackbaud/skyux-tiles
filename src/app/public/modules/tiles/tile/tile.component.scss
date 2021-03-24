@@ -117,4 +117,16 @@
       }
     }
   }
+
+  @include sky-host-responsive-container-xs-min() {
+    .sky-tile {
+      border-radius: 0px;
+    }
+  }
+
+  @include sky-host-responsive-container-sm-min() {
+    .sky-tile {
+      border-radius: $sky-theme-modern-box-border-radius-default;
+    }
+  }
 }
