@@ -58,7 +58,8 @@ import {
   Tile2TestComponent
 } from './fixtures/tile2.component.fixture';
 
-import { TileDashboardOnPushTestComponent
+import {
+  TileDashboardOnPushTestComponent
 } from './fixtures/tile-dashboard-on-push.component.fixture';
 
 import {
