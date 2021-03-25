@@ -1,56 +1,110 @@
 import {
-  by,
-  element
-} from 'protractor';
+  SkyHostBrowserBreakpoint
+} from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
 
 import {
   expect,
-  SkyHostBrowser
+  SkyHostBrowser,
+  SkyVisualThemeSelector
 } from '@skyux-sdk/e2e';
 
-describe('Tile', () => {
-  function testFocus(selector: string, name: string, done: DoneFn) {
-    SkyHostBrowser.get('visual/tiles');
-    SkyHostBrowser.setWindowBreakpoint('lg');
+describe('Tiles', () => {
 
-    element.all(
-      by.css('#screenshot-tiles ' + selector)
-    ).get(0).sendKeys();
+  //#region helpers
+  let browserSize: SkyHostBrowserBreakpoint;
+  let currentTheme: string;
+  let currentThemeMode: string;
 
-    expect('#screenshot-tiles .tile1 .sky-tile-header').toMatchBaselineScreenshot(done, {
-      screenshotName: 'tile-header-focus-' + name
-    });
+  async function selectTheme(theme: string, mode: string): Promise<void> {
+    currentTheme = theme;
+    currentThemeMode = mode;
+
+    return SkyVisualThemeSelector.selectTheme(theme, mode);
   }
 
-  it('should match previous screenshot', (done) => {
-    SkyHostBrowser.get('visual/tiles');
-    SkyHostBrowser.setWindowBreakpoint('lg');
-    expect('#screenshot-tiles').toMatchBaselineScreenshot(done, {
-      screenshotName: 'tiles-lg'
+  async function setBrowserSize(size: SkyHostBrowserBreakpoint): Promise<void> {
+    browserSize = size;
+
+    return SkyHostBrowser.setWindowBreakpoint(size);
+  }
+
+  function getScreenshotName(name: string): string {
+    if (browserSize) {
+      name += '-' + browserSize;
+    }
+
+    if (currentTheme) {
+      name += '-' + currentTheme;
+    }
+
+    if (currentThemeMode) {
+      name += '-' + currentThemeMode;
+    }
+
+    return name;
+  }
+
+  function runTests(): void {
+    it('should match previous screenshot', async (done) => {
+      await SkyHostBrowser.scrollTo('#screenshot-tiles');
+      expect('#screenshot-tiles').toMatchBaselineScreenshot(done, {
+        screenshotName: getScreenshotName('tiles')
+      });
+    });
+  }
+  //#endregion
+
+  describe('(size: lg)', () => {
+    beforeEach( async() => {
+      currentTheme = undefined;
+      currentThemeMode = undefined;
+      await SkyHostBrowser.get('visual/tiles');
+      await setBrowserSize('lg');
+    });
+
+    runTests();
+
+    describe('when modern theme', () => {
+      beforeEach(async () => {
+        await selectTheme('modern', 'light');
+      });
+
+      runTests();
+    });
+
+    describe('when modern theme in dark mode', () => {
+      beforeEach(async () => {
+        await selectTheme('modern', 'dark');
+      });
+
+      runTests();
     });
   });
 
-  it('should match previous screenshot (screen: xs)', (done) => {
-    SkyHostBrowser.get('visual/tiles');
-    SkyHostBrowser.setWindowBreakpoint('xs');
-    expect('#screenshot-tiles').toMatchBaselineScreenshot(done, {
-      screenshotName: 'tiles-xs'
+  describe('(size: xs)', () => {
+    beforeEach( async() => {
+      currentTheme = undefined;
+      currentThemeMode = undefined;
+      await SkyHostBrowser.get('visual/tiles');
+      await setBrowserSize('xs');
     });
-  });
 
-  it('should match previous screenshot when help button is focused', (done) => {
-    testFocus('.sky-tile-help', 'help', done);
-  });
+    runTests();
 
-  it('should match previous screenshot when chevron is focused', (done) => {
-    testFocus('.sky-chevron', 'chevron', done);
-  });
+    describe('when modern theme', () => {
+      beforeEach(async () => {
+        await selectTheme('modern', 'light');
+      });
 
-  it('should match previous screenshot when settings button is focused', (done) => {
-    testFocus('.sky-tile-settings', 'settings', done);
-  });
+      runTests();
+    });
 
-  it('should match previous screenshot when grab handle is focused', (done) => {
-    testFocus('.sky-tile-grab-handle', 'grab-handle', done);
+    describe('when modern theme in dark mode', () => {
+      beforeEach(async () => {
+        await selectTheme('modern', 'dark');
+      });
+
+      runTests();
+    });
   });
 });
