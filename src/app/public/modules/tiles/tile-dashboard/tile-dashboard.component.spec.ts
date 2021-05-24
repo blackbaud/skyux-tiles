@@ -10,6 +10,10 @@ import {
 } from '@angular/core/testing';
 
 import {
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
+
+import {
   SkyUIConfigService
 } from '@skyux/core';
 
@@ -116,6 +120,7 @@ describe('Tile dashboard component', () => {
         }
       ],
       imports: [
+        NoopAnimationsModule,
         SkyTileDashboardFixturesModule
       ]
     });

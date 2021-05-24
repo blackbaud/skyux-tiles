@@ -7,10 +7,6 @@ import {
 } from '@angular/common';
 
 import {
-  BrowserAnimationsModule
-} from '@angular/platform-browser/animations';
-
-import {
   SkyI18nModule
 } from '@skyux/i18n';
 
@@ -46,7 +42,6 @@ import {
     SkyTileTitleComponent
   ],
   imports: [
-    BrowserAnimationsModule,
     CommonModule,
     SkyChevronModule,
     SkyI18nModule,

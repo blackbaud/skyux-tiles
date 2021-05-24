@@ -12,6 +12,10 @@ import {
 } from '@angular/core/testing';
 
 import {
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
+
+import {
   SkyMediaQueryService,
   SkyMediaBreakpoints,
   SkyUIConfigService
@@ -129,6 +133,7 @@ describe('Tile dashboard service', () => {
 
     TestBed.configureTestingModule({
       imports: [
+        NoopAnimationsModule,
         SkyTileDashboardFixturesModule,
         SkyTilesModule
       ],

@@ -6,6 +6,10 @@ import {
 } from '@angular/core/testing';
 
 import {
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
+
+import {
   expect
 } from '@skyux-sdk/testing';
 
@@ -64,6 +68,7 @@ describe('Tile component', () => {
         TileTestComponent
       ],
       imports: [
+        NoopAnimationsModule,
         SkyTilesModule
       ],
       providers: [
