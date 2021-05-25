@@ -8,6 +8,10 @@ import {
 } from '@angular/platform-browser';
 
 import {
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
+
+import {
   expect
 } from '@skyux-sdk/testing';
 
@@ -55,6 +59,7 @@ describe('Tile content section component', () => {
       ],
       imports: [
         BrowserModule,
+        NoopAnimationsModule,
         SkyTilesModule
       ],
       providers: [

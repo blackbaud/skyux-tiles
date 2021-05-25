@@ -1,6 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SkyTileModule } from './tile/tile.module';
 import { SkyTileContentModule } from './tile-content/tile-content.module';
@@ -9,7 +8,7 @@ import { SkyTileDashboardColumnModule } from './tile-dashboard-column/tile-dashb
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule
+    CommonModule
   ],
   exports: [
     SkyTileContentModule,
