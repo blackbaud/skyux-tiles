@@ -24,6 +24,10 @@ import {
 } from './docs/tiles/tile-demo-tile2.component';
 
 import {
+  SkyTilesForRootCompatModule
+} from './public/modules/shared/tiles-for-root-compat.module';
+
+import {
   SkyTilesModule
 } from './public/public_api';
 
@@ -36,6 +40,9 @@ import {
 } from './visual/tiles/tile-demo-tile2.component';
 
 @NgModule({
+  imports: [
+    SkyTilesForRootCompatModule
+  ],
   exports: [
     SkyAppLinkModule,
     SkyDocsToolsModule,
