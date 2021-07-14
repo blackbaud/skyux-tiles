@@ -1,5 +1,11 @@
+# 5.0.0-beta.0 (2021-07-14)
+
+- Initial `5.0.0-beta` release.
+- Added support for `5.0.0-beta.*` versions of SKY UX component libraries. [#79](https://github.com/blackbaud/skyux-tiles/pull/79)
+
 # 5.0.0-alpha.0 (2021-05-24)
 
+- Added support for `@angular/core@^12`. [#78](https://github.com/blackbaud/skyux-tiles/pull/78)
 - Removed `BrowserAnimationsModule` from the `imports` section of `SkyTilesModule` to support lazy-loading. Consumers of `SkyTilesModule` must now import `BrowserAnimationsModule` into their application's root module. [#78](https://github.com/blackbaud/skyux-tiles/pull/78)
 
 # 4.1.0 (2021-03-25)
