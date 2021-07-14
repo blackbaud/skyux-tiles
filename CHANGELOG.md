@@ -1,4 +1,4 @@
-# 5.0.0-beta.0 (2021-07-13)
+# 5.0.0-beta.0 (2021-07-14)
 
 - Initial `5.0.0-beta` release.
 - Added support for `5.0.0-beta.*` versions of SKY UX component libraries. [#79](https://github.com/blackbaud/skyux-tiles/pull/79)
