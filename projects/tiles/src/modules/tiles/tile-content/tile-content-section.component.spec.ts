@@ -1,18 +1,13 @@
 import {
-  async,
   TestBed
 } from '@angular/core/testing';
-
-import {
-  BrowserModule
-} from '@angular/platform-browser';
 
 import {
   NoopAnimationsModule
 } from '@angular/platform-browser/animations';
 
 import {
-  expect
+  expect, expectAsync
 } from '@skyux-sdk/testing';
 
 import {
@@ -58,7 +53,6 @@ describe('Tile content section component', () => {
         TileContentSectionTestComponent
       ],
       imports: [
-        BrowserModule,
         NoopAnimationsModule,
         SkyTilesModule
       ],
@@ -82,11 +76,10 @@ describe('Tile content section component', () => {
     ).toBe(1);
   });
 
-  it('should pass accessibility', async(() => {
+  it('should pass accessibility', async () => {
     let fixture = TestBed.createComponent(TileContentSectionTestComponent);
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(fixture.nativeElement).toBeAccessible();
-    });
-  }));
+    await fixture.whenStable()
+    await expectAsync(fixture.nativeElement).toBeAccessible();
+  });
 });

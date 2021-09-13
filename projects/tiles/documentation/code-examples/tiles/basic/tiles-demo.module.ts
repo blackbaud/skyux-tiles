@@ -8,7 +8,7 @@ import {
 
 import {
   SkyTilesModule
-} from '@skyux/tiles';
+} from 'projects/tiles/src/public-api';
 
 import {
   TilesDemoComponent

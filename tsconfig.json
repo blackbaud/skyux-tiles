@@ -17,6 +17,9 @@
       "dom"
     ],
     "paths": {
+      "@skyux/tiles": [
+        "projects/tiles/src/public-api.ts"
+      ],
       "tiles": [
         "dist/tiles/tiles",
         "dist/tiles"
