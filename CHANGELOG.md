@@ -1,3 +1,8 @@
+# 5.0.0-beta.2 (2021-09-14)
+
+- Added support for "partial" Ivy compilation mode. [#83](https://github.com/blackbaud/skyux-tiles/pull/83)
+- Updated the peer dependencies. [#83](https://github.com/blackbaud/skyux-tiles/pull/83)
+
 # 5.0.0-beta.1 (2021-08-27)
 
 - Migrated to Angular CLI. [#81](https://github.com/blackbaud/skyux-tiles/pull/81)
