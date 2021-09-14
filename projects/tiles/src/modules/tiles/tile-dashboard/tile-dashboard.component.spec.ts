@@ -5,8 +5,7 @@ import {
 import {
   fakeAsync,
   TestBed,
-  tick,
-  async
+  tick
 } from '@angular/core/testing';
 
 import {
@@ -18,7 +17,7 @@ import {
 } from '@skyux/core';
 
 import {
-  expect
+  expect, expectAsync
 } from '@skyux-sdk/testing';
 
 import {
@@ -611,13 +610,11 @@ describe('Tile dashboard component', () => {
       expect(mockUIConfigService.setConfig).not.toHaveBeenCalled();
   }));
 
-  it('should pass accessibility', async(() => {
+  it('should pass accessibility', async () => {
     let fixture = TestBed.createComponent(TileDashboardOnPushTestComponent);
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      // For some reason we have to run change detection twice for the tile to actually render.
-      fixture.detectChanges();
-      expect(fixture.nativeElement).toBeAccessible();
-    });
-  }));
+    await fixture.whenStable()
+    fixture.detectChanges();
+    await expectAsync(fixture.nativeElement).toBeAccessible();
+  });
 });

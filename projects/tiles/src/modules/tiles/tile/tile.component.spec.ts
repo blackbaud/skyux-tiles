@@ -1,8 +1,7 @@
 import {
   fakeAsync,
   TestBed,
-  tick,
-  async
+  tick
 } from '@angular/core/testing';
 
 import {
@@ -10,7 +9,7 @@ import {
 } from '@angular/platform-browser/animations';
 
 import {
-  expect
+  expect, expectAsync
 } from '@skyux-sdk/testing';
 
 import {
@@ -397,11 +396,10 @@ describe('Tile component', () => {
     });
   });
 
-  it('should pass accessibility', async(() => {
+  it('should pass accessibility', async () => {
     let fixture = TestBed.createComponent(TileTestComponent);
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(fixture.nativeElement).toBeAccessible();
-    });
-  }));
+    await fixture.whenStable()
+    await expectAsync(fixture.nativeElement).toBeAccessible();
+  });
 });

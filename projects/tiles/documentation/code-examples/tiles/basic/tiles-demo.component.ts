@@ -4,7 +4,7 @@ import {
 
 import {
   SkyTileDashboardConfig
-} from '@skyux/tiles';
+} from 'projects/tiles/src/public-api';
 
 import {
   TileDemoTile1Component

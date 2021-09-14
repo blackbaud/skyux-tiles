@@ -17,3 +17,13 @@ export * from './modules/tiles/tile-dashboard-config/tile-dashboard-config-reord
 export * from './modules/tiles/tile-dashboard-config/tile-dashboard-config-tile';
 
 export * from './modules/tiles/tiles.module';
+
+// Components and directives must be exported to support Angular’s “partial” Ivy compiler.
+// Obscure names are used to indicate types are not part of the public API.
+export { SkyTileComponent as λ1 } from './modules/tiles/tile/tile.component';
+export { SkyTileSummaryComponent as λ2 } from './modules/tiles/tile/tile-summary.component';
+export { SkyTileTitleComponent as λ3 } from './modules/tiles/tile/tile-title.component';
+export { SkyTileContentSectionComponent as λ4 } from './modules/tiles/tile-content/tile-content-section.component';
+export { SkyTileContentComponent as λ5 } from './modules/tiles/tile-content/tile-content.component';
+export { SkyTileDashboardColumnComponent as λ6 } from './modules/tiles/tile-dashboard-column/tile-dashboard-column.component';
+export { SkyTileDashboardComponent as λ7 } from './modules/tiles/tile-dashboard/tile-dashboard.component';
