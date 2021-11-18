@@ -1,10 +1,8 @@
-import {
-  Component
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'sky-tile-2',
-  templateUrl: './tile-demo-tile2.component.html'
+  templateUrl: './tile-demo-tile2.component.html',
 })
-export class SkyTileDemoTile2Component { }
+export class SkyTileDemoTile2Component {}

@@ -1,7 +1,4 @@
-import {
-  expect,
-  SkyHostBrowser
-} from '@skyux-sdk/e2e';
+import { expect, SkyHostBrowser } from '@skyux-sdk/e2e';
 
 describe('Tile with default theme', () => {
   beforeEach(async () => {
@@ -11,14 +8,14 @@ describe('Tile with default theme', () => {
   it('should match previous screenshot', async (done) => {
     await SkyHostBrowser.setWindowBreakpoint('lg');
     expect('#screenshot-tiles-theme').toMatchBaselineScreenshot(done, {
-      screenshotName: 'tiles-theme-lg'
+      screenshotName: 'tiles-theme-lg',
     });
   });
 
   it('should match previous screenshot (screen: xs)', async (done) => {
     await SkyHostBrowser.setWindowBreakpoint('xs');
     expect('#screenshot-tiles-theme').toMatchBaselineScreenshot(done, {
-      screenshotName: 'tiles-theme-xs'
+      screenshotName: 'tiles-theme-xs',
     });
   });
 });

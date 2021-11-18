@@ -1,22 +1,14 @@
-import {
-  Component
-} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {
-  SkyTileDashboardConfig
-} from 'projects/tiles/src/public-api';
+import { SkyTileDashboardConfig } from 'projects/tiles/src/public-api';
 
-import {
-  SkyTileDemoTile1Component
-} from '../tiles/tile-demo-tile1.component';
+import { SkyTileDemoTile1Component } from '../tiles/tile-demo-tile1.component';
 
-import {
-  SkyTileDemoTile2Component
-} from '../tiles/tile-demo-tile2.component';
+import { SkyTileDemoTile2Component } from '../tiles/tile-demo-tile2.component';
 
 @Component({
-  selector: 'sky-tile-theme-demo',
-  templateUrl: 'tile-theme-visual.component.html'
+  selector: 'app-tile-theme-demo',
+  templateUrl: 'tile-theme-visual.component.html',
 })
 export class SkyTileThemeDemoComponent {
   public dashboardConfig: SkyTileDashboardConfig;
@@ -26,45 +18,45 @@ export class SkyTileThemeDemoComponent {
       tiles: [
         {
           id: 'tile1',
-          componentType: SkyTileDemoTile1Component
+          componentType: SkyTileDemoTile1Component,
         },
         {
           id: 'tile2',
-          componentType: SkyTileDemoTile2Component
-        }
+          componentType: SkyTileDemoTile2Component,
+        },
       ],
       layout: {
         singleColumn: {
           tiles: [
             {
               id: 'tile2',
-              isCollapsed: false
+              isCollapsed: false,
             },
             {
               id: 'tile1',
-              isCollapsed: true
-            }
-          ]
+              isCollapsed: true,
+            },
+          ],
         },
         multiColumn: [
           {
             tiles: [
               {
                 id: 'tile1',
-                isCollapsed: true
-              }
-            ]
+                isCollapsed: true,
+              },
+            ],
           },
           {
             tiles: [
               {
                 id: 'tile2',
-                isCollapsed: false
-              }
-            ]
-          }
-        ]
-      }
+                isCollapsed: false,
+              },
+            ],
+          },
+        ],
+      },
     };
   }
 }

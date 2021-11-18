@@ -1,15 +1,8 @@
-import {
-  SkyHostBrowserBreakpoint
-} from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
+import { SkyHostBrowserBreakpoint } from '@skyux-sdk/e2e/host-browser/host-browser-breakpoint';
 
-import {
-  expect,
-  SkyHostBrowser,
-  SkyVisualThemeSelector
-} from '@skyux-sdk/e2e';
+import { expect, SkyHostBrowser, SkyVisualThemeSelector } from '@skyux-sdk/e2e';
 
 describe('Tiles', () => {
-
   //#region helpers
   let browserSize: SkyHostBrowserBreakpoint;
   let currentTheme: string;
@@ -48,14 +41,14 @@ describe('Tiles', () => {
     it('should match previous screenshot', async (done) => {
       await SkyHostBrowser.scrollTo('#screenshot-tiles');
       expect('#screenshot-tiles').toMatchBaselineScreenshot(done, {
-        screenshotName: getScreenshotName('tiles')
+        screenshotName: getScreenshotName('tiles'),
       });
     });
   }
   //#endregion
 
   describe('(size: lg)', () => {
-    beforeEach( async() => {
+    beforeEach(async () => {
       currentTheme = undefined;
       currentThemeMode = undefined;
       await SkyHostBrowser.get('visual/tiles');
@@ -82,7 +75,7 @@ describe('Tiles', () => {
   });
 
   describe('(size: xs)', () => {
-    beforeEach( async() => {
+    beforeEach(async () => {
       currentTheme = undefined;
       currentThemeMode = undefined;
       await SkyHostBrowser.get('visual/tiles');
