@@ -19,14 +19,14 @@ import { SkyE2eThemeSelectorModule } from '@skyux/e2e-client';
     SkyTileDemoTile2Component,
     SkyTileDemoComponent,
     SkyTileThemeDemoComponent,
-    VisualComponent
+    VisualComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     SkyE2eThemeSelectorModule,
     SkyPageModule,
-    SkyTilesModule
-  ]
+    SkyTilesModule,
+  ],
 })
-export class VisualModule { }
+export class VisualModule {}

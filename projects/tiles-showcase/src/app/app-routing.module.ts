@@ -8,20 +8,20 @@ import { VisualComponent } from './visual/visual.component';
 const routes: Routes = [
   {
     path: '',
-    component: VisualComponent
+    component: VisualComponent,
   },
   {
     path: 'visual/tiles',
-    component: SkyTileDemoComponent
+    component: SkyTileDemoComponent,
   },
   {
     path: 'visual/tiles-theme',
-    component: SkyTileThemeDemoComponent
-  }
+    component: SkyTileThemeDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

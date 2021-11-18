@@ -12,18 +12,10 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "@skyux/tiles": [
-        "projects/tiles/src/public-api.ts"
-      ],
-      "tiles": [
-        "dist/tiles/tiles",
-        "dist/tiles"
-      ]
+      "@skyux/tiles": ["projects/tiles/src/public-api.ts"],
+      "tiles": ["dist/tiles/tiles", "dist/tiles"]
     }
   },
   "angularCompilerOptions": {
