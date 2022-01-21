@@ -29,7 +29,11 @@
             *ngIf="hasHelp"
             class="sky-btn sky-tile-tools-control sky-tile-help"
             type="button"
-            [attr.aria-label]="'skyux_tile_help' | skyLibResources: tileLabel"
+            [attr.aria-label]="
+              tileLabel
+                ? ('skyux_tile_help' | skyLibResources: tileLabel)
+                : null
+            "
             [skyThemeClass]="{
               'sky-btn-icon-borderless': 'modern'
             }"
@@ -40,7 +44,11 @@
         </ng-container>
         <sky-chevron
           [ariaControls]="tileContent.id"
-          [ariaLabel]="'skyux_tile_expand' | skyLibResources: tileLabel"
+          [ariaLabel]="
+            tileLabel
+              ? ('skyux_tile_expand' | skyLibResources: tileLabel)
+              : null
+          "
           [direction]="isCollapsed ? 'down' : 'up'"
           [skyThemeClass]="{
             'sky-tile-tools-control': 'default',
@@ -53,7 +61,11 @@
           *ngIf="hasSettings"
           class="sky-btn sky-tile-settings"
           type="button"
-          [attr.aria-label]="'skyux_tile_settings' | skyLibResources: tileLabel"
+          [attr.aria-label]="
+            tileLabel
+              ? ('skyux_tile_settings' | skyLibResources: tileLabel)
+              : null
+          "
           [skyThemeClass]="{
             'sky-tile-tools-control': 'default',
             'sky-btn-icon-borderless sky-margin-inline-default': 'modern'
@@ -71,7 +83,9 @@
           *ngIf="isInDashboardColumn"
           class="sky-btn sky-tile-grab-handle"
           [attr.aria-label]="
-            'skyux_tile_grab_handle' | skyLibResources: tileLabel
+            tileLabel
+              ? ('skyux_tile_grab_handle' | skyLibResources: tileLabel)
+              : null
           "
           [attr.aria-describedby]="
             dashboardService?.bagId + '-move-instructions'
