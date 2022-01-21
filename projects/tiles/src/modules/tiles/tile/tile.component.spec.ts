@@ -1,4 +1,9 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,6 +33,24 @@ describe('Tile component', () => {
   let mockThemeSvc: {
     settingsChange: BehaviorSubject<SkyThemeSettingsChange>;
   };
+
+  function getExpandButton(fixture: ComponentFixture<any>): HTMLButtonElement {
+    return fixture.nativeElement.querySelector('sky-chevron button');
+  }
+
+  function getHelpButton(fixture: ComponentFixture<any>): HTMLButtonElement {
+    return fixture.nativeElement.querySelector('.sky-tile-help');
+  }
+
+  function getMoveButton(fixture: ComponentFixture<any>): HTMLButtonElement {
+    return fixture.nativeElement.querySelector('.sky-tile-grab-handle');
+  }
+
+  function getSettingsButton(
+    fixture: ComponentFixture<any>
+  ): HTMLButtonElement {
+    return fixture.nativeElement.querySelector('.sky-tile-settings');
+  }
 
   beforeEach(() => {
     mockThemeSvc = {
@@ -184,7 +207,7 @@ describe('Tile component', () => {
   describe('settings button', () => {
     it('should be absent if a callback is not provided', () => {
       let html = `
-        <sky-tile [isCollapsed]="tileIsCollapsed">
+        <sky-tile tileLabel="test" [isCollapsed]="tileIsCollapsed">
           <sky-tile-title>Title</sky-tile-title>
           <sky-tile-content>Content</sky-tile-content>
         </sky-tile>
@@ -196,25 +219,22 @@ describe('Tile component', () => {
         },
       }).createComponent(TileTestComponent);
 
-      let el = fixture.nativeElement;
-
       fixture.detectChanges();
 
-      expect(el.querySelector('.sky-tile-settings')).toBeNull();
+      expect(getSettingsButton(fixture)).toBeNull();
     });
 
     it('should be present if a callback is provided', () => {
       let fixture = TestBed.createComponent(TileTestComponent);
-      let el = fixture.nativeElement;
 
       fixture.detectChanges();
 
-      expect(el.querySelector('.sky-tile-settings')).not.toBeNull();
+      expect(getSettingsButton(fixture)).not.toBeNull();
     });
 
     it('should not be present if a callback is provided, but the showSettings flag is false', () => {
       let html = `
-        <sky-tile [isCollapsed]="tileIsCollapsed" (settingsClick)="alert('settings clicked.')" [showSettings]="false">
+        <sky-tile tileLabel="test" [isCollapsed]="tileIsCollapsed" (settingsClick)="alert('settings clicked.')" [showSettings]="false">
           <sky-tile-title>Title</sky-tile-title>
           <sky-tile-content>Content</sky-tile-content>
         </sky-tile>
@@ -226,22 +246,19 @@ describe('Tile component', () => {
         },
       }).createComponent(TileTestComponent);
 
-      let el = fixture.nativeElement;
-
       fixture.detectChanges();
 
-      expect(el.querySelector('.sky-tile-settings')).toBeNull();
+      expect(getSettingsButton(fixture)).toBeNull();
     });
 
     it('should call the specified callback when clicked', () => {
       let fixture = TestBed.createComponent(TileTestComponent);
-      let el = fixture.nativeElement;
       let cmp = fixture.componentInstance as TileTestComponent;
       let tileSettingsClickSpy = spyOn(cmp, 'tileSettingsClick');
 
       fixture.detectChanges();
 
-      el.querySelector('.sky-tile-settings').click();
+      getSettingsButton(fixture).click();
 
       expect(tileSettingsClickSpy).toHaveBeenCalled();
     });
@@ -252,7 +269,7 @@ describe('Tile component', () => {
 
       fixture.detectChanges();
 
-      el.querySelector('.sky-tile-settings').click();
+      getSettingsButton(fixture).click();
       fixture.detectChanges();
 
       let contentAttrs = el.querySelector('.sky-tile-content').attributes;
@@ -264,7 +281,7 @@ describe('Tile component', () => {
   describe('help button', () => {
     it('should be absent if a callback is not provided', () => {
       let html = `
-        <sky-tile [isCollapsed]="tileIsCollapsed">
+        <sky-tile tileLabel="test" [isCollapsed]="tileIsCollapsed">
           <sky-tile-title>Title</sky-tile-title>
           <sky-tile-content>Content</sky-tile-content>
         </sky-tile>
@@ -276,28 +293,23 @@ describe('Tile component', () => {
         },
       }).createComponent(TileTestComponent);
 
-      let el = fixture.nativeElement;
-
       fixture.detectChanges();
 
-      expect(el.querySelector('.sky-tile-help')).toBeNull();
+      expect(getHelpButton(fixture)).toBeNull();
     });
 
     it('should be present if a callback is provided', () => {
       let fixture = TestBed.createComponent(TileTestComponent);
-      let el = fixture.nativeElement;
 
       fixture.detectChanges();
 
-      const helpEl = el.querySelector('.sky-tile-help');
-
-      expect(helpEl).not.toBeNull();
-      expect(helpEl.getAttribute('aria-label')).toBe('Help');
+      expect(getHelpButton(fixture)).not.toBeNull();
     });
 
     it('should not be present if a callback is provided, but the showHelp flag is false', () => {
       let html = `
         <sky-tile
+          tileLabel="test"
           [isCollapsed]="tileIsCollapsed"
           (helpClick)="alert('help clicked.')"
           [showHelp]="false"
@@ -313,22 +325,19 @@ describe('Tile component', () => {
         },
       }).createComponent(TileTestComponent);
 
-      let el = fixture.nativeElement;
-
       fixture.detectChanges();
 
-      expect(el.querySelector('.sky-tile-help')).toBeNull();
+      expect(getHelpButton(fixture)).toBeNull();
     });
 
     it('should call the specified callback when clicked', () => {
       let fixture = TestBed.createComponent(TileTestComponent);
-      let el = fixture.nativeElement;
       let cmp = fixture.componentInstance as TileTestComponent;
       let tileHelpClickSpy = spyOn(cmp, 'tileHelpClick');
 
       fixture.detectChanges();
 
-      el.querySelector('.sky-tile-help').click();
+      getHelpButton(fixture).click();
 
       expect(tileHelpClickSpy).toHaveBeenCalled();
     });
@@ -339,7 +348,7 @@ describe('Tile component', () => {
 
       fixture.detectChanges();
 
-      el.querySelector('.sky-tile-help').click();
+      getHelpButton(fixture).click();
       fixture.detectChanges();
 
       let contentAttrs = el.querySelector('.sky-tile-content').attributes;
@@ -347,6 +356,53 @@ describe('Tile component', () => {
       expect(contentAttrs['hidden']).toBe(undefined);
     });
   });
+
+  it('should throw warning when tileLabel is not defined', fakeAsync(() => {
+    const spy = spyOn(console, 'warn').and.callThrough();
+    let fixture = TestBed.createComponent(TileTestComponent);
+    fixture.componentInstance.tileLabel = undefined;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalled();
+  }));
+
+  it('should not throw warning when tileLabel is defined', fakeAsync(() => {
+    const spy = spyOn(console, 'warn').and.callThrough();
+    let fixture = TestBed.createComponent(TileTestComponent);
+    fixture.componentInstance.tileLabel = 'Users';
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    expect(spy).not.toHaveBeenCalled();
+  }));
+
+  it('should create accessible aria labels when tileLabel is defined', fakeAsync(() => {
+    let fixture = TestBed.createComponent(TileTestComponent);
+    fixture.componentInstance.tileLabel = 'Users';
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    // Force tile to render move button.
+    fixture.componentInstance.tileComponent.isInDashboardColumn = true;
+    fixture.detectChanges();
+    const helpButton = getHelpButton(fixture);
+    const expandButton = getExpandButton(fixture);
+    const moveButton = getMoveButton(fixture);
+    const settingsButton = getSettingsButton(fixture);
+    expect(helpButton.getAttribute('aria-label')).toEqual('Users tile help');
+    expect(expandButton.getAttribute('aria-label')).toEqual(
+      'Expand the Users tile'
+    );
+    expect(moveButton.getAttribute('aria-label')).toEqual(
+      'Move the Users tile'
+    );
+    expect(settingsButton.getAttribute('aria-label')).toEqual(
+      'Users tile settings'
+    );
+  }));
 
   it('should pass accessibility', async () => {
     let fixture = TestBed.createComponent(TileTestComponent);

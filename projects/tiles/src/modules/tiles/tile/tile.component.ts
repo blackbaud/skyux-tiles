@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -18,6 +19,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { SkyTileDashboardService } from '../tile-dashboard/tile-dashboard.service';
 
+let nextId = 0;
+
 /**
  * Provides a common look-and-feel for tab content.
  */
@@ -27,7 +30,7 @@ import { SkyTileDashboardService } from '../tile-dashboard/tile-dashboard.servic
   templateUrl: './tile.component.html',
   animations: [skyAnimationSlide],
 })
-export class SkyTileComponent implements OnDestroy {
+export class SkyTileComponent implements OnDestroy, AfterViewInit {
   /**
    * Indicates whether to display a settings button in the tile header. To display the
    * button, you must also listen for the `settingsClick` event.
@@ -43,6 +46,12 @@ export class SkyTileComponent implements OnDestroy {
    */
   @Input()
   public showHelp = true;
+
+  /**
+   * Specifies an ARIA label for the tile. This sets the tile's aria-label attribute to [support accessibility](https://developer.blackbaud.com/skyux/learn/accessibility).
+   */
+  @Input()
+  public tileLabel;
 
   /**
    * Fires when users select the settings button in the tile header. The settings
@@ -91,6 +100,8 @@ export class SkyTileComponent implements OnDestroy {
 
   public isInDashboardColumn = false;
 
+  public tileId: string = `sky-flyout-${++nextId}`;
+
   @ViewChild('grabHandle', {
     read: ElementRef,
     static: false,
@@ -125,6 +136,15 @@ export class SkyTileComponent implements OnDestroy {
         .subscribe(() => {
           this.changeDetector.markForCheck();
         });
+    }
+  }
+
+  public ngAfterViewInit(): void {
+    if (!this.tileLabel) {
+      console.warn(
+        '[Accessibility warning] For screen readers to properly associate the tile controls with its parent tile, you must declare a label for each tile by setting the `titleLabel` attribute on the tile component:\n' +
+          '<sky-tile tileLabel="Users">'
+      );
     }
   }
 

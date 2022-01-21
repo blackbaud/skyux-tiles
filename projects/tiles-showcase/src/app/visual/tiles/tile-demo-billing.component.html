@@ -1,0 +1,24 @@
+<sky-tile
+  tileLabel="Billing"
+  [showHelp]="true"
+  (helpClick)="tileHelpClick()"
+  (settingsClick)="tileSettingsClick()"
+>
+  <sky-tile-title>Billing</sky-tile-title>
+  <sky-tile-summary>$123.4m</sky-tile-summary>
+  <sky-tile-content>
+    <sky-tile-content-section>Past due: $123.4m</sky-tile-content-section>
+    <sky-tile-content-section>
+      <h3>Billing questions?</h3>
+      <p>
+        <a href="#">View open invoices</a>
+      </p>
+      <p>
+        <a href="#">View villing FAQs</a>
+      </p>
+      <p>
+        <a href="#">Contact billing support</a>
+      </p>
+    </sky-tile-content-section>
+  </sky-tile-content>
+</sky-tile>

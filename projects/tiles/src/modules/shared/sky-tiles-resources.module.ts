@@ -12,22 +12,11 @@ import {
   SkyI18nModule,
   SkyLibResources,
   SkyLibResourcesProvider,
-  SKY_LIB_RESOURCES_PROVIDERS,
+  SKY_LIB_RESOURCES_PROVIDERS
 } from '@skyux/i18n';
 
 const RESOURCES: { [locale: string]: SkyLibResources } = {
-  'EN-US': {
-    skyux_tile_help: { message: 'Help' },
-    skyux_tile_settings: { message: 'Settings' },
-    skyux_tile_grab_handle: {
-      message:
-        'Use arrow keys to reorder. Press up and down arrow keys to change position in column. Press left and right arrow keys to change position to another column.',
-    },
-    skyux_tile_moved_assistive_text: {
-      message:
-        '{0} moved. Current column: {1} of {2}. Current position in column: {3} of {4}',
-    },
-  },
+  'EN-US': {"skyux_tile_expand":{"message":"Expand the {0} tile"},"skyux_tile_help":{"message":"{0} tile help"},"skyux_tile_settings":{"message":"{0} tile settings"},"skyux_tile_grab_handle":{"message":"Move the {0} tile"},"skyux_tile_grab_handle_instructions":{"message":"When focused on a tile's move button, use arrow keys to reorder. Press up and down arrow keys to change position in column. Press left and right arrow keys to change position to another column."},"skyux_tile_moved_assistive_text":{"message":"{0} moved. Current column: {1} of {2}. Current position in column: {3} of {4}"}},
 };
 
 export class SkyTilesResourcesProvider implements SkyLibResourcesProvider {
@@ -41,12 +30,10 @@ export class SkyTilesResourcesProvider implements SkyLibResourcesProvider {
  */
 @NgModule({
   exports: [SkyI18nModule],
-  providers: [
-    {
-      provide: SKY_LIB_RESOURCES_PROVIDERS,
-      useClass: SkyTilesResourcesProvider,
-      multi: true,
-    },
-  ],
+  providers: [{
+    provide: SKY_LIB_RESOURCES_PROVIDERS,
+    useClass: SkyTilesResourcesProvider,
+    multi: true
+  }]
 })
-export class SkyTilesResourcesModule {}
+export class SkyTilesResourcesModule { }
