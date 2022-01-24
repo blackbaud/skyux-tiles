@@ -142,7 +142,7 @@ export class SkyTileComponent implements OnDestroy, AfterViewInit {
   public ngAfterViewInit(): void {
     if (!this.tileLabel) {
       console.warn(
-        '[Accessibility warning] For screen readers to properly associate the tile controls with its parent tile, you must declare a label for each tile by setting the `titleLabel` attribute on the tile component:\n' +
+        '[Accessibility warning] For screen readers to properly associate the tile controls with their parent tile, you must declare a label for each tile by setting the `titleLabel` attribute on the tile component:\n' +
           '<sky-tile tileLabel="Users">'
       );
     }
