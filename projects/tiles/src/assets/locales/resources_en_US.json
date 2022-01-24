@@ -8,7 +8,7 @@
     "message": "{0} tile help"
   },
   "skyux_tile_settings": {
-    "_description": "Label for settings button in the tile",
+    "_description": "Label for the settings button in the tile",
     "message": "{0} tile settings"
   },
   "skyux_tile_grab_handle": {
