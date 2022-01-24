@@ -1,6 +1,6 @@
 {
   "skyux_tile_expand": {
-    "_description": "Label for expand button in the tile",
+    "_description": "Label for the expand-and-collapse button in the tile",
     "message": "Expand the {0} tile"
   },
   "skyux_tile_help": {
