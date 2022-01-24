@@ -394,7 +394,7 @@ describe('Tile component', () => {
     const settingsButton = getSettingsButton(fixture);
     expect(helpButton.getAttribute('aria-label')).toEqual('Users tile help');
     expect(expandButton.getAttribute('aria-label')).toEqual(
-      'Expand the Users tile'
+      'Expand or collapse the Users tile'
     );
     expect(moveButton.getAttribute('aria-label')).toEqual(
       'Move the Users tile'
