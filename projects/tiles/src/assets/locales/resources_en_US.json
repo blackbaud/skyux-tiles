@@ -17,7 +17,7 @@
   },
   "skyux_tile_grab_handle_instructions": {
     "_description": "Long description for grab handle in the tile",
-    "message": "When focused on a tile's move button, use arrow keys to reorder. Press up and down arrow keys to change position in column. Press left and right arrow keys to change position to another column."
+    "message": "When focus is placed on a tile's grab handle, use the arrow keys to move it. The up and down keys change its position within a column. The left and right keys move it between columns."
   },
   "skyux_tile_moved_assistive_text": {
     "_description": "Report of the new location of a recently moved tile",
