@@ -48,7 +48,7 @@ export class SkyTileComponent implements OnDestroy, AfterViewInit {
   public showHelp = true;
 
   /**
-   * Specifies an ARIA label for the tile. This sets the tile's aria-label attribute to [support accessibility](https://developer.blackbaud.com/skyux/learn/accessibility).
+   * Specifies an ARIA label for the tile. This sets the tile's `aria-label` attribute to [support accessibility](https://developer.blackbaud.com/skyux/learn/accessibility).
    */
   @Input()
   public tileLabel;
