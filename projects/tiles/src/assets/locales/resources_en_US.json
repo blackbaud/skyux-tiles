@@ -16,7 +16,7 @@
     "message": "Move the {0} tile"
   },
   "skyux_tile_grab_handle_instructions": {
-    "_description": "Long description for grab handle in the tile",
+    "_description": "Long description for the grab handle in the tile",
     "message": "When focus is placed on a tile's grab handle, use the arrow keys to move it. The up and down keys change its position within a column. The left and right keys move it between columns."
   },
   "skyux_tile_moved_assistive_text": {
