@@ -4,7 +4,7 @@
     "message": "Expand the {0} tile"
   },
   "skyux_tile_help": {
-    "_description": "Label for help button in the tile",
+    "_description": "Label for the help button in the tile",
     "message": "{0} tile help"
   },
   "skyux_tile_settings": {
