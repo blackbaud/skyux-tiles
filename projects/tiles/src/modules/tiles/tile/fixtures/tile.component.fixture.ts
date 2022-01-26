@@ -13,7 +13,7 @@ export class TileTestComponent {
 
   public tileIsCollapsed = false;
 
-  public tileLabel: string = 'test';
+  public tileName: string = 'test';
 
   public tileSettingsClick() {}
 

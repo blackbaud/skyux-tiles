@@ -207,7 +207,7 @@ describe('Tile component', () => {
   describe('settings button', () => {
     it('should be absent if a callback is not provided', () => {
       let html = `
-        <sky-tile tileLabel="test" [isCollapsed]="tileIsCollapsed">
+        <sky-tile tileName="test" [isCollapsed]="tileIsCollapsed">
           <sky-tile-title>Title</sky-tile-title>
           <sky-tile-content>Content</sky-tile-content>
         </sky-tile>
@@ -234,7 +234,7 @@ describe('Tile component', () => {
 
     it('should not be present if a callback is provided, but the showSettings flag is false', () => {
       let html = `
-        <sky-tile tileLabel="test" [isCollapsed]="tileIsCollapsed" (settingsClick)="alert('settings clicked.')" [showSettings]="false">
+        <sky-tile tileName="test" [isCollapsed]="tileIsCollapsed" (settingsClick)="alert('settings clicked.')" [showSettings]="false">
           <sky-tile-title>Title</sky-tile-title>
           <sky-tile-content>Content</sky-tile-content>
         </sky-tile>
@@ -281,7 +281,7 @@ describe('Tile component', () => {
   describe('help button', () => {
     it('should be absent if a callback is not provided', () => {
       let html = `
-        <sky-tile tileLabel="test" [isCollapsed]="tileIsCollapsed">
+        <sky-tile tileName="test" [isCollapsed]="tileIsCollapsed">
           <sky-tile-title>Title</sky-tile-title>
           <sky-tile-content>Content</sky-tile-content>
         </sky-tile>
@@ -309,7 +309,7 @@ describe('Tile component', () => {
     it('should not be present if a callback is provided, but the showHelp flag is false', () => {
       let html = `
         <sky-tile
-          tileLabel="test"
+          tileName="test"
           [isCollapsed]="tileIsCollapsed"
           (helpClick)="alert('help clicked.')"
           [showHelp]="false"
@@ -357,31 +357,9 @@ describe('Tile component', () => {
     });
   });
 
-  it('should throw warning when tileLabel is not defined', fakeAsync(() => {
-    const spy = spyOn(console, 'warn').and.callThrough();
+  it('should create default aria labels when tileName is not defined', fakeAsync(() => {
     let fixture = TestBed.createComponent(TileTestComponent);
-    fixture.componentInstance.tileLabel = undefined;
-    fixture.detectChanges();
-    tick();
-    fixture.detectChanges();
-
-    expect(spy).toHaveBeenCalled();
-  }));
-
-  it('should not throw warning when tileLabel is defined', fakeAsync(() => {
-    const spy = spyOn(console, 'warn').and.callThrough();
-    let fixture = TestBed.createComponent(TileTestComponent);
-    fixture.componentInstance.tileLabel = 'Users';
-    fixture.detectChanges();
-    tick();
-    fixture.detectChanges();
-
-    expect(spy).not.toHaveBeenCalled();
-  }));
-
-  it('should create accessible aria labels when tileLabel is defined', fakeAsync(() => {
-    let fixture = TestBed.createComponent(TileTestComponent);
-    fixture.componentInstance.tileLabel = 'Users';
+    fixture.componentInstance.tileName = undefined;
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
@@ -392,16 +370,33 @@ describe('Tile component', () => {
     const expandButton = getExpandButton(fixture);
     const moveButton = getMoveButton(fixture);
     const settingsButton = getSettingsButton(fixture);
-    expect(helpButton.getAttribute('aria-label')).toEqual('Users tile help');
+    expect(helpButton.getAttribute('aria-label')).toEqual('Help');
     expect(expandButton.getAttribute('aria-label')).toEqual(
-      'Expand or collapse the Users tile'
+      'Expand or collapse'
     );
-    expect(moveButton.getAttribute('aria-label')).toEqual(
-      'Move the Users tile'
+    expect(moveButton.getAttribute('aria-label')).toEqual('Move');
+    expect(settingsButton.getAttribute('aria-label')).toEqual('Settings');
+  }));
+
+  it('should create accessible aria labels when tileName is defined', fakeAsync(() => {
+    let fixture = TestBed.createComponent(TileTestComponent);
+    fixture.componentInstance.tileName = 'Users';
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    // Force tile to render move button.
+    fixture.componentInstance.tileComponent.isInDashboardColumn = true;
+    fixture.detectChanges();
+    const helpButton = getHelpButton(fixture);
+    const expandButton = getExpandButton(fixture);
+    const moveButton = getMoveButton(fixture);
+    const settingsButton = getSettingsButton(fixture);
+    expect(helpButton.getAttribute('aria-label')).toEqual('Users help');
+    expect(expandButton.getAttribute('aria-label')).toEqual(
+      'Expand or collapse Users'
     );
-    expect(settingsButton.getAttribute('aria-label')).toEqual(
-      'Users tile settings'
-    );
+    expect(moveButton.getAttribute('aria-label')).toEqual('Move Users');
+    expect(settingsButton.getAttribute('aria-label')).toEqual('Users settings');
   }));
 
   it('should pass accessibility', async () => {

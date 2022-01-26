@@ -1,5 +1,5 @@
+import { AnimationEvent } from '@angular/animations';
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -30,7 +30,7 @@ let nextId = 0;
   templateUrl: './tile.component.html',
   animations: [skyAnimationSlide],
 })
-export class SkyTileComponent implements OnDestroy, AfterViewInit {
+export class SkyTileComponent implements OnDestroy {
   /**
    * Indicates whether to display a settings button in the tile header. To display the
    * button, you must also listen for the `settingsClick` event.
@@ -48,10 +48,10 @@ export class SkyTileComponent implements OnDestroy, AfterViewInit {
   public showHelp = true;
 
   /**
-   * Specifies an ARIA label for the tile. This sets the tile's `aria-label` attribute to [support accessibility](https://developer.blackbaud.com/skyux/learn/accessibility).
+   * Specifies a human-readable name for the tile that is used to construct ARIA labels for the tile controls to [support accessibility](https://developer.blackbaud.com/skyux/learn/accessibility).
    */
   @Input()
-  public tileLabel;
+  public tileName;
 
   /**
    * Fires when users select the settings button in the tile header. The settings
@@ -100,6 +100,8 @@ export class SkyTileComponent implements OnDestroy, AfterViewInit {
 
   public isInDashboardColumn = false;
 
+  public showContent: boolean = true;
+
   public tileId: string = `sky-flyout-${++nextId}`;
 
   @ViewChild('grabHandle', {
@@ -139,18 +141,21 @@ export class SkyTileComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  public ngAfterViewInit(): void {
-    if (!this.tileLabel) {
-      console.warn(
-        '[Accessibility warning] For screen readers to properly associate the tile controls with their parent tile, you must declare a label for each tile by setting the `titleLabel` attribute on the tile component:\n' +
-          '<sky-tile tileLabel="Users">'
-      );
-    }
-  }
-
   public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public animationDone(event: AnimationEvent) {
+    if (event.fromState === 'down' && event.toState === 'up') {
+      this.showContent = false;
+    }
+  }
+
+  public animationStart(event: AnimationEvent) {
+    if (event.fromState === 'up' && event.toState === 'down') {
+      this.showContent = true;
+    }
   }
 
   public settingsButtonClicked(): void {

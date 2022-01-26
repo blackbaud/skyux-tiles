@@ -30,9 +30,9 @@
             class="sky-btn sky-tile-tools-control sky-tile-help"
             type="button"
             [attr.aria-label]="
-              tileLabel
-                ? ('skyux_tile_help' | skyLibResources: tileLabel)
-                : null
+              tileName
+                ? ('skyux_tile_help' | skyLibResources: tileName)
+                : ('skyux_tile_help_default' | skyLibResources)
             "
             [skyThemeClass]="{
               'sky-btn-icon-borderless': 'modern'
@@ -45,9 +45,9 @@
         <sky-chevron
           [ariaControls]="tileContent.id"
           [ariaLabel]="
-            tileLabel
-              ? ('skyux_tile_expand' | skyLibResources: tileLabel)
-              : null
+            tileName
+              ? ('skyux_tile_expand' | skyLibResources: tileName)
+              : ('skyux_tile_expand_default' | skyLibResources)
           "
           [direction]="isCollapsed ? 'down' : 'up'"
           [skyThemeClass]="{
@@ -62,9 +62,9 @@
           class="sky-btn sky-tile-settings"
           type="button"
           [attr.aria-label]="
-            tileLabel
-              ? ('skyux_tile_settings' | skyLibResources: tileLabel)
-              : null
+            tileName
+              ? ('skyux_tile_settings' | skyLibResources: tileName)
+              : ('skyux_tile_settings_default' | skyLibResources)
           "
           [skyThemeClass]="{
             'sky-tile-tools-control': 'default',
@@ -83,9 +83,9 @@
           *ngIf="isInDashboardColumn"
           class="sky-btn sky-tile-grab-handle"
           [attr.aria-label]="
-            tileLabel
-              ? ('skyux_tile_grab_handle' | skyLibResources: tileLabel)
-              : null
+            tileName
+              ? ('skyux_tile_move' | skyLibResources: tileName)
+              : ('skyux_tile_move_default' | skyLibResources)
           "
           [attr.aria-describedby]="
             dashboardService?.bagId + '-move-instructions'
@@ -113,7 +113,7 @@
     role="region"
     skyId
     [attr.aria-hidden]="isCollapsed"
-    [attr.aria-label]="tileLabel"
+    [attr.aria-label]="tileName"
     [@skyAnimationSlide]="isCollapsed ? 'up' : 'down'"
     #tileContent="skyId"
   >

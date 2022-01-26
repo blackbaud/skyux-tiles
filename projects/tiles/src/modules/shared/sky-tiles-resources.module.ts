@@ -17,13 +17,17 @@ import {
 
 const RESOURCES: { [locale: string]: SkyLibResources } = {
   'EN-US': {
-    skyux_tile_expand: { message: 'Expand or collapse the {0} tile' },
-    skyux_tile_help: { message: '{0} tile help' },
-    skyux_tile_settings: { message: '{0} tile settings' },
-    skyux_tile_grab_handle: { message: 'Move the {0} tile' },
-    skyux_tile_grab_handle_instructions: {
+    skyux_tile_expand: { message: 'Expand or collapse {0}' },
+    skyux_tile_expand_default: { message: 'Expand or collapse' },
+    skyux_tile_help: { message: '{0} help' },
+    skyux_tile_help_default: { message: 'Help' },
+    skyux_tile_settings: { message: '{0} settings' },
+    skyux_tile_settings_default: { message: 'Settings' },
+    skyux_tile_move: { message: 'Move {0}' },
+    skyux_tile_move_default: { message: 'Move' },
+    skyux_tile_move_instructions: {
       message:
-        "When focus is placed on a tile's grab handle, use the arrow keys to move it. The up and down keys change its position within a column. The left and right keys move it between columns.",
+        "When focus is placed on a tile's move button, use the arrow keys to move it. The up and down keys change its position within a column. The left and right keys move it between columns.",
     },
     skyux_tile_moved_assistive_text: {
       message:
