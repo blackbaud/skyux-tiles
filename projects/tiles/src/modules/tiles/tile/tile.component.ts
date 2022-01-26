@@ -100,10 +100,6 @@ export class SkyTileComponent implements OnDestroy {
 
   public isInDashboardColumn = false;
 
-  public showContent: boolean = true;
-
-  public tileId: string = `sky-flyout-${++nextId}`;
-
   @ViewChild('grabHandle', {
     read: ElementRef,
     static: false,
@@ -144,18 +140,6 @@ export class SkyTileComponent implements OnDestroy {
   public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  public animationDone(event: AnimationEvent) {
-    if (event.fromState === 'down' && event.toState === 'up') {
-      this.showContent = false;
-    }
-  }
-
-  public animationStart(event: AnimationEvent) {
-    if (event.fromState === 'up' && event.toState === 'down') {
-      this.showContent = true;
-    }
   }
 
   public settingsButtonClicked(): void {
