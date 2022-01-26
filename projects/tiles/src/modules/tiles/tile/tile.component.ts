@@ -19,8 +19,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { SkyTileDashboardService } from '../tile-dashboard/tile-dashboard.service';
 
-let nextId = 0;
-
 /**
  * Provides a common look-and-feel for tab content.
  */
