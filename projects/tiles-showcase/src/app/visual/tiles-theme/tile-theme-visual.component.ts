@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 import { SkyTileDashboardConfig } from 'projects/tiles/src/public-api';
 
-import { SkyTileDemoTile1Component } from '../tiles/tile-demo-tile1.component';
+import { SkyTileDemoBillingComponent } from '../tiles/tile-demo-billing.component';
 
-import { SkyTileDemoTile2Component } from '../tiles/tile-demo-tile2.component';
+import { SkyTileDemoProductsComponent } from '../tiles/tile-demo-products.component';
 
 @Component({
   selector: 'app-tile-theme-demo',
@@ -18,11 +18,11 @@ export class SkyTileThemeDemoComponent {
       tiles: [
         {
           id: 'tile1',
-          componentType: SkyTileDemoTile1Component,
+          componentType: SkyTileDemoBillingComponent,
         },
         {
           id: 'tile2',
-          componentType: SkyTileDemoTile2Component,
+          componentType: SkyTileDemoProductsComponent,
         },
       ],
       layout: {

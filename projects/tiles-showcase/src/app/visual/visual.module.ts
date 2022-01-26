@@ -6,8 +6,8 @@ import { SkyPageModule } from '@skyux/layout';
 
 import { SkyTilesModule } from 'projects/tiles/src/public-api';
 
-import { SkyTileDemoTile1Component } from './tiles/tile-demo-tile1.component';
-import { SkyTileDemoTile2Component } from './tiles/tile-demo-tile2.component';
+import { SkyTileDemoBillingComponent } from './tiles/tile-demo-billing.component';
+import { SkyTileDemoProductsComponent } from './tiles/tile-demo-products.component';
 import { SkyTileDemoComponent } from './tiles/tile-visual.component';
 import { SkyTileThemeDemoComponent } from './tiles-theme/tile-theme-visual.component';
 import { VisualComponent } from './visual.component';
@@ -15,8 +15,8 @@ import { SkyE2eThemeSelectorModule } from '@skyux/e2e-client';
 
 @NgModule({
   declarations: [
-    SkyTileDemoTile1Component,
-    SkyTileDemoTile2Component,
+    SkyTileDemoBillingComponent,
+    SkyTileDemoProductsComponent,
     SkyTileDemoComponent,
     SkyTileThemeDemoComponent,
     VisualComponent,
