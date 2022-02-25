@@ -1,3 +1,7 @@
-# @skyux/tiles Workspace
+# @skyux/tiles (moved)
 
-For information about `@skyux/tiles` please visit the library's README file, located at `projects/tiles/README.md`.
+### *The source code for `@skyux/tiles` has moved to [blackbaud/skyux](https://github.com/blackbaud/skyux).*
+
+To work with the latest version of `@skyux/tiles`, go to [blackbaud/skyux](https://github.com/blackbaud/skyux).
+
+The source code for SKY UX 4 remains in the [`4.x.x`](https://github.com/blackbaud/skyux-tiles/tree/4.x.x) branch of this repo.
